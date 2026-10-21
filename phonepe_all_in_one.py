@@ -97,11 +97,24 @@ def find_chrome_executable():
         r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
         os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
         os.path.expandvars(r"%PROGRAMFILES%\Google\Chrome\Application\chrome.exe"),
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+        "/usr/bin/chromium",
+        "/usr/bin/chromium-browser",
+        "/snap/bin/chromium",
     ]
     for p in paths:
         if os.path.exists(p):
             return p
     return None
+
+
+def is_headless_default() -> bool:
+    if os.environ.get("HEADLESS", "").lower() in ("true", "1", "yes"):
+        return True
+    if sys.platform != "win32" and not os.environ.get("DISPLAY"):
+        return True
+    return False
 
 
 def is_cdp_port_open(port: int = 9222) -> bool:
@@ -113,7 +126,9 @@ def is_cdp_port_open(port: int = 9222) -> bool:
         return False
 
 
-async def get_stealth_browser_context(playwright, headless: bool = False):
+async def get_stealth_browser_context(playwright, headless: bool = None):
+    if headless is None:
+        headless = is_headless_default()
     """
     Launches and connects to genuine native Google Chrome via CDP (port 9222).
     Because Chrome runs as a standard Windows app without automation pipes,
@@ -222,7 +237,7 @@ async def get_active_page():
             browser_context = None
 
     # 2. Fresh initialization
-    browser_context = await get_stealth_browser_context(playwright_instance, headless=False)
+    browser_context = await get_stealth_browser_context(playwright_instance, headless=is_headless_default())
     pages = [p for p in browser_context.pages if not p.is_closed()]
     for p in pages:
         try:
@@ -1070,7 +1085,7 @@ async def sync_phonepe_history_to_db(page) -> dict:
     seen_refs = set()
 
     for p_num in [1, 2, 3, 4]:
-        page_rows = await page.evaluate("""async (num) => {
+        page_rows = await page.evaluate(r"""async (num) => {
             const item = document.querySelector('.ant-pagination-item-' + num);
             if (!item && num > 1) return [];
 
@@ -1500,9 +1515,12 @@ async def lifespan(app: FastAPI):
     os.makedirs(PROFILE_DIR, exist_ok=True)
     print(f"📁 PhonePe Profile Directory: {PROFILE_DIR}")
 
+    live_monitor_task = None
+    db_watcher_task = None
+
     playwright_instance = await async_playwright().start()
     try:
-        browser_context = await get_stealth_browser_context(playwright_instance, headless=False)
+        browser_context = await get_stealth_browser_context(playwright_instance, headless=is_headless_default())
         print("🚀 Stealth Chrome browser context initialized.")
 
         # 1. Automatically open PhonePe Live window
@@ -1995,10 +2013,11 @@ async def lifespan(app: FastAPI):
         pass
     finally:
         for t in [live_monitor_task, db_watcher_task]:
-            try:
-                t.cancel()
-            except Exception:
-                pass
+            if t:
+                try:
+                    t.cancel()
+                except Exception:
+                    pass
         if browser_context:
             try:
                 await browser_context.close()
@@ -2934,7 +2953,7 @@ def run_interactive_login():
 
 async def _run_playwright_login():
     async with async_playwright() as p:
-        context = await get_stealth_browser_context(p, headless=False)
+        context = await get_stealth_browser_context(p, headless=is_headless_default())
         try:
             page = context.pages[0] if context.pages else await context.new_page()
             print(f"\n🌐 Navigating to PhonePe Business Login ({PHONEPE_LOGIN_URL})...")
@@ -3144,6 +3163,12 @@ def main():
         help="Target Webhook URL to dispatch real-time payment events to",
     )
     parser.add_argument(
+        "--headless",
+        action="store_true",
+        default=is_headless_default(),
+        help="Run browser in headless mode (auto-detected on headless Linux servers)",
+    )
+    parser.add_argument(
         "--password",
         type=str,
         default=os.environ.get("WEB_APP_PASSWORD", "admin123"),
@@ -3151,6 +3176,9 @@ def main():
     )
 
     args = parser.parse_args()
+
+    if args.headless:
+        os.environ["HEADLESS"] = "1"
 
     if args.webhook_url:
         GLOBAL_WEBHOOK_URL = args.webhook_url
