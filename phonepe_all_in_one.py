@@ -60,8 +60,8 @@ PHONEPE_LIVE_URL = "https://business.phonepe.com/dashboard/transactions/live"
 PHONEPE_HISTORY_URL = "https://business.phonepe.com/dashboard/transactions/history"
 PHONEPE_TRANSACTIONS_URL = PHONEPE_LIVE_URL
 PHONEPE_LOGIN_URL = "https://business.phonepe.com/login"
-DEFAULT_HOST = "127.0.0.1"
-DEFAULT_PORT = 8000
+DEFAULT_HOST = os.environ.get("HOST", "0.0.0.0")
+DEFAULT_PORT = int(os.environ.get("PORT", 8000))
 
 # Stealth & anti-detection arguments for PhonePe's bot protection
 BROWSER_ARGS = [
@@ -3126,10 +3126,16 @@ def main():
         help="Sync all transactions from PhonePe History page into MySQL database",
     )
     parser.add_argument(
+        "--host",
+        type=str,
+        default=DEFAULT_HOST,
+        help=f"Host to run FastAPI server (default: {DEFAULT_HOST})",
+    )
+    parser.add_argument(
         "--port",
         type=int,
         default=DEFAULT_PORT,
-        help="Port to run FastAPI server (default: 8000)",
+        help=f"Port to run FastAPI server (default: {DEFAULT_PORT})",
     )
     parser.add_argument(
         "--webhook-url",
@@ -3154,10 +3160,10 @@ def main():
     if args.login:
         run_interactive_login()
     elif args.server:
-        print(f"🌟 Starting PhonePe FastAPI Server on http://{DEFAULT_HOST}:{args.port}")
+        print(f"🌟 Starting PhonePe FastAPI Server on http://{args.host}:{args.port}")
         if GLOBAL_WEBHOOK_URL:
             print(f"🔗 Real-time Webhook Dispatcher active -> {GLOBAL_WEBHOOK_URL}")
-        uvicorn.run(app, host=DEFAULT_HOST, port=args.port)
+        uvicorn.run(app, host=args.host, port=args.port)
     elif args.sync_db:
         asyncio.run(run_sync_db_cli())
     elif args.test:
