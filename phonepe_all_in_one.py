@@ -2461,33 +2461,21 @@ async def phonepe_auth_send_otp(request: Request):
 async def click_continue_on_page(page) -> dict:
     """
     Robust multi-strategy click on PhonePe's CONTINUE / PROCEED button.
-    1. Finds any element with text 'CONTINUE' or 'PROCEED'
-    2. Calculates its exact screen coordinates
-    3. Issues real OS-level mouse click via page.mouse.click (100% trusted event)
-    4. Issues Playwright locator force click
-    5. Dispatches pointerdown, mousedown, pointerup, mouseup, click, and form submit
-    6. Presses Enter on keyboard
+    1. Finds the exact <button> containing 'CONTINUE' or 'PROCEED'
+    2. Focuses and clicks it directly with Playwright locator force click
+    3. Issues real OS-level mouse click via page.mouse.click at exact button center
+    4. Triggers JS click and form submit
+    5. Presses Enter on keyboard
     """
     info = await page.evaluate("""() => {
-        const all = Array.from(document.querySelectorAll('*'));
-        let target = null;
-        for (const el of all) {
-            const txt = (el.innerText || el.value || '').trim().toUpperCase();
-            if (txt === 'CONTINUE' || txt === 'PROCEED' || (txt.startsWith('CONTINUE') && txt.length < 15)) {
-                const rect = el.getBoundingClientRect();
-                const style = window.getComputedStyle(el);
-                if (rect.width > 30 && rect.height > 15 && style.visibility !== 'hidden' && style.display !== 'none') {
-                    if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.tagName === 'INPUT') {
-                        target = el;
-                        break;
-                    }
-                    if (!target) target = el;
-                }
-            }
-        }
+        // Find exclusively BUTTON or role=button elements
+        const buttons = Array.from(document.querySelectorAll("button, [role='button'], input[type='submit']"));
+        let target = buttons.find(b => {
+            const t = (b.innerText || b.value || '').trim().toUpperCase();
+            return t === 'CONTINUE' || t === 'PROCEED' || t.includes('CONTINUE');
+        });
         if (!target) {
-            target = document.querySelector("button[type='submit']") || 
-                     Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE'));
+            target = document.querySelector("button[type='submit']") || document.querySelector("button");
         }
         if (!target) return { found: false };
         const rect = target.getBoundingClientRect();
@@ -2504,42 +2492,38 @@ async def click_continue_on_page(page) -> dict:
     }""")
     print(f"🔍 [PhonePe Continue Button Info]: {info}")
 
-    if not info.get("found"):
-        await page.keyboard.press("Enter")
-        return {"clicked": False, "method": "enter_fallback", "info": info}
-
-    bx = info["x"]
-    by = info["y"]
-
-    # Method 1: Real CDP mouse click at exact center coordinates (100% trusted event)
+    # Method 1: Playwright locator click on button (first and highest priority)
     try:
-        await page.mouse.move(bx, by)
-        await asyncio.sleep(0.08)
-        await page.mouse.down()
-        await asyncio.sleep(0.05)
-        await page.mouse.up()
-        print(f"🎯 [PhonePe Auth] Executed real CDP mouse click at ({bx}, {by}).")
-    except Exception as me:
-        print(f"⚠️ CDP mouse click failed: {me}")
-
-    # Method 2: Playwright locator click with force=True
-    try:
-        loc = page.locator("button:has-text('CONTINUE'), button:has-text('Continue'), [role='button']:has-text('CONTINUE'), text=CONTINUE").first
+        loc = page.locator("button:has-text('CONTINUE'), button:has-text('Continue'), button[type='submit'], [role='button']:has-text('CONTINUE')").first
         if await loc.count() > 0:
-            await loc.click(force=True, timeout=2000)
+            await loc.click(force=True, timeout=3000)
             print("🎯 [PhonePe Auth] Executed locator force-click on CONTINUE.")
     except Exception as le:
         print(f"⚠️ Locator click warning: {le}")
 
-    # Method 3: Native DOM event dispatch & form submit
-    await page.evaluate("""(coords) => {
-        const el = document.elementFromPoint(coords.x, coords.y) || 
-                   Array.from(document.querySelectorAll('button, [role="button"], div, span')).find(b => {
-                       const t = (b.innerText || '').trim().toUpperCase();
-                       return t === 'CONTINUE' || t === 'PROCEED';
-                   });
-        if (el) {
-            const btn = el.closest('button') || el.closest('[role="button"]') || el;
+    # Method 2: Real CDP mouse click at exact center coordinates (100% trusted event)
+    if info.get("found"):
+        bx = info["x"]
+        by = info["y"]
+        try:
+            await page.mouse.move(bx, by)
+            await asyncio.sleep(0.05)
+            await page.mouse.down()
+            await asyncio.sleep(0.05)
+            await page.mouse.up()
+            print(f"🎯 [PhonePe Auth] Executed real CDP mouse click at ({bx}, {by}).")
+        except Exception as me:
+            print(f"⚠️ CDP mouse click failed: {me}")
+
+    # Method 3: Native DOM click & form submit
+    await page.evaluate("""() => {
+        const btn = Array.from(document.querySelectorAll("button, [role='button'], input[type='submit']")).find(b => {
+            const t = (b.innerText || b.value || '').trim().toUpperCase();
+            return t === 'CONTINUE' || t === 'PROCEED' || t.includes('CONTINUE');
+        }) || document.querySelector("button[type='submit']");
+        if (btn) {
+            btn.removeAttribute('disabled');
+            btn.click();
             ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'].forEach(evt => {
                 btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
             });
@@ -2547,7 +2531,7 @@ async def click_continue_on_page(page) -> dict:
                 try { btn.form.requestSubmit(); } catch(e) {}
             }
         }
-    }""", {"x": bx, "y": by})
+    }""")
 
     # Method 4: Keyboard Enter
     try:
