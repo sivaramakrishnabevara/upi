@@ -1564,6 +1564,8 @@ async def lifespan(app: FastAPI):
 
             print("👀 [Live Monitor] Active on Live page. Waiting for incoming payments...")
             last_login_log_time = 0
+            last_keep_alive_time = time.time()
+            keep_alive_interval = random.randint(90, 210)
 
             while True:
                 try:
@@ -1698,15 +1700,39 @@ async def lifespan(app: FastAPI):
 
                                 print(f"🚨 [Live Monitor] Payment detected on Live page: ID: {target_id} | Time: '{target_time}' | Amount: ₹{target_amt}!")
 
-                                # Step 1: Detect transaction -> random delay between 3 and 14 seconds before navigating to History page
-                                delay_before_history = round(random.uniform(3.0, 14.0), 2)
-                                print(f"⏳ [Live Monitor] Payment detected. Waiting {delay_before_history}s before navigating to History page...")
+                                # Step 1: Detect transaction -> random delay between 2 and 20 seconds before navigating to History page
+                                delay_before_history = round(random.uniform(2.0, 20.0), 2)
+                                print(f"⏳ [Live Monitor] Payment detected. Waiting {delay_before_history}s before clicking History...")
                                 await asyncio.sleep(delay_before_history)
 
-                                print(f"🔄 Navigating to History page ({PHONEPE_HISTORY_URL}) to compare time, open & extract note...")
+                                print(f"🔄 Opening History page ({PHONEPE_HISTORY_URL}) to compare timestamp, open & extract note...")
 
-                                # Step 2: Open History page
-                                await p.goto(PHONEPE_HISTORY_URL, wait_until="domcontentloaded", timeout=40000)
+                                # Step 2: Open History page (Click Transactions History UI tab, fallback to direct goto)
+                                clicked_history = False
+                                try:
+                                    clicked_history = await p.evaluate("""() => {
+                                        const candidates = Array.from(document.querySelectorAll('a, button, [role="tab"], div'));
+                                        const hist = candidates.find(el => {
+                                            const txt = (el.innerText || el.getAttribute('aria-label') || '').trim();
+                                            return /^(transactions\\s*history|history)$/i.test(txt) || (el.getAttribute('href') || '').includes('/transactions/history');
+                                        });
+                                        if (hist) {
+                                            hist.click();
+                                            return true;
+                                        }
+                                        return false;
+                                    }""")
+                                except Exception:
+                                    clicked_history = False
+
+                                if clicked_history:
+                                    try:
+                                        await p.wait_for_url("**/transactions/history**", timeout=6000)
+                                    except Exception:
+                                        pass
+
+                                if "/transactions/history" not in (p.url or ""):
+                                    await p.goto(PHONEPE_HISTORY_URL, wait_until="domcontentloaded", timeout=40000)
 
                                 # Wait for random duration between 2 and 6 seconds to allow transaction list to load
                                 delay_history_load = round(random.uniform(2.0, 6.0), 2)
@@ -1954,7 +1980,32 @@ async def lifespan(app: FastAPI):
                                 print(f"🌐 [Live Monitor] Returning to Live page ({PHONEPE_LIVE_URL}) to continue monitoring...")
                                 await p.goto(PHONEPE_LIVE_URL, wait_until="domcontentloaded", timeout=35000)
                                 await asyncio.sleep(2)
+                                last_keep_alive_time = time.time()
+                                keep_alive_interval = random.randint(90, 210)
                                 print("👀 [Live Monitor] Active on Live page. Waiting for incoming payments...")
+                            else:
+                                # No new transactions on Live page.
+                                # Periodically reload or click to maintain PhonePe portal session without logout
+                                now = time.time()
+                                if now - last_keep_alive_time >= keep_alive_interval:
+                                    try:
+                                        print(f"🔄 [Live Monitor] Keep-alive interval ({keep_alive_interval}s) reached. Performing session maintenance click/reload...")
+                                        if random.random() < 0.6:
+                                            # Light reload of Live transactions page to refresh tokens & websockets
+                                            await p.reload(wait_until="domcontentloaded", timeout=30000)
+                                            await asyncio.sleep(2)
+                                        else:
+                                            # Subtle random click on non-destructive element
+                                            await p.evaluate("""() => {
+                                                const el = document.querySelector('thead, th, h1, h2, [class*="title"], [class*="header"]');
+                                                if (el) el.click();
+                                            }""")
+                                            await asyncio.sleep(1)
+                                        print("✅ [Live Monitor] Session kept alive successfully without logout.")
+                                    except Exception as ka_err:
+                                        print(f"⚠️ [Live Monitor] Session keep-alive notice: {ka_err}")
+                                    last_keep_alive_time = time.time()
+                                    keep_alive_interval = random.randint(90, 210)
                 except asyncio.CancelledError:
                     break
                 except Exception as e:
@@ -2012,11 +2063,8 @@ async def lifespan(app: FastAPI):
 
         print("⚡ PhonePe FastAPI Server ready with Live-to-History monitor & real-time DB change sync.")
 
-        try:
-            yield
-        except (asyncio.CancelledError, GeneratorExit):
-            pass
-    except (asyncio.CancelledError, GeneratorExit):
+        yield
+    except asyncio.CancelledError:
         pass
     finally:
         for t in [live_monitor_task, db_watcher_task]:
@@ -2028,12 +2076,12 @@ async def lifespan(app: FastAPI):
         if browser_context:
             try:
                 await browser_context.close()
-            except (Exception, asyncio.CancelledError, GeneratorExit):
+            except Exception:
                 pass
         if playwright_instance:
             try:
                 await playwright_instance.stop()
-            except (Exception, asyncio.CancelledError, GeneratorExit):
+            except Exception:
                 pass
         print("🛑 Browser context and Playwright stopped.")
 
@@ -2313,6 +2361,10 @@ async def phonepe_auth_send_otp(request: Request):
             # 3. Locate Phone/Mobile input
             phone_input = None
             selectors = [
+                "input[aria-label*='Phone' i]",
+                "input[aria-label*='email' i]",
+                "input[id*='react-aria']",
+                "[aria-label='Phone number or email']",
                 "input[name='identifier']",
                 "input[placeholder*='phone' i]",
                 "input[placeholder*='mobile' i]",
