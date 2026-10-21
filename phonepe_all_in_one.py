@@ -2388,37 +2388,55 @@ async def phonepe_auth_send_otp(request: Request):
                 )
 
             # Clear input completely using Select All + Backspace
+            await phone_input.scroll_into_view_if_needed()
             await phone_input.click()
             await page.keyboard.press("Control+A")
             await page.keyboard.press("Backspace")
             await phone_input.fill("")
+            await asyncio.sleep(0.1)
 
-            # Type the 10-digit clean phone number cleanly ONCE
-            await phone_input.type(clean_phone, delay=60)
-            await page.keyboard.press("Tab")
-            await asyncio.sleep(0.5)
+            # Type the 10-digit clean phone number using real keyboard presses
+            for ch in clean_phone:
+                await page.keyboard.press(ch)
+                await asyncio.sleep(0.04)
+            await asyncio.sleep(0.2)
 
-            actual_input_val = await phone_input.input_value()
-            print(f"📱 [PhonePe Auth Box Content]: '{actual_input_val}' (Length: {len(actual_input_val)})")
-
-            # Fallback if input value did not take
-            if actual_input_val != clean_phone:
-                await page.evaluate("""(val) => {
-                    const input = document.querySelector("input[name='identifier']") || document.querySelector("input[type='text']") || document.querySelector("input[type='tel']") || document.querySelector("input");
-                    if (input) {
-                        input.focus();
-                        try {
-                            const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-                            nativeSetter.call(input, val);
-                        } catch(e) {
-                            input.value = val;
-                        }
-                        input.dispatchEvent(new Event('input', { bubbles: true }));
-                        input.dispatchEvent(new Event('change', { bubbles: true }));
+            # Ensure React Aria and Hook Form internal state trackers register the 10 digits
+            await page.evaluate("""(val) => {
+                const inputs = Array.from(document.querySelectorAll("input"));
+                const target = inputs.find(i => {
+                    const id = i.id || '';
+                    const aria = i.getAttribute('aria-label') || '';
+                    const placeholder = i.placeholder || '';
+                    const name = i.name || '';
+                    return id.includes('react-aria') || /phone|mobile|identifier/i.test(aria + placeholder + name);
+                }) || document.querySelector("input[type='tel']") || document.querySelector("input[type='text']");
+                
+                if (target) {
+                    target.focus();
+                    const prev = target.value;
+                    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
+                    if (setter) {
+                        setter.call(target, val);
+                    } else {
+                        target.value = val;
                     }
-                }""", clean_phone)
-                await page.keyboard.press("Tab")
-                await asyncio.sleep(0.5)
+                    if (target._valueTracker) {
+                        target._valueTracker.setValue('');
+                    }
+                    target.dispatchEvent(new Event('input', { bubbles: true }));
+                    target.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }""", clean_phone)
+            await asyncio.sleep(0.4)
+
+            # Focus input and press Enter
+            try:
+                await phone_input.focus()
+                await page.keyboard.press("Enter")
+                await asyncio.sleep(0.3)
+            except Exception:
+                pass
 
             btn_info = await page.evaluate("""() => {
                 const btn = document.querySelector("button[type='submit']") || Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE') || (b.innerText || '').toUpperCase().includes('PROCEED'));
@@ -2513,85 +2531,75 @@ async def phonepe_auth_send_otp(request: Request):
 async def click_continue_on_page(page) -> dict:
     """
     Robust multi-strategy click on PhonePe's CONTINUE / PROCEED button.
-    1. Finds the exact <button> containing 'CONTINUE' or 'PROCEED'
-    2. Focuses and clicks it directly with Playwright locator force click
+    1. Presses Enter on focused form input
+    2. Uses Playwright locator to scroll, hover, and click with delay
     3. Issues real OS-level mouse click via page.mouse.click at exact button center
-    4. Triggers JS click and form submit
-    5. Presses Enter on keyboard
+    4. Dispatches native PointerEvent and Form submit
     """
-    info = await page.evaluate("""() => {
-        // Find exclusively BUTTON or role=button elements
-        const buttons = Array.from(document.querySelectorAll("button, [role='button'], input[type='submit']"));
-        let target = buttons.find(b => {
-            const t = (b.innerText || b.value || '').trim().toUpperCase();
-            return t === 'CONTINUE' || t === 'PROCEED' || t.includes('CONTINUE');
-        });
-        if (!target) {
-            target = document.querySelector("button[type='submit']") || document.querySelector("button");
-        }
-        if (!target) return { found: false };
-        const rect = target.getBoundingClientRect();
-        return {
-            found: true,
-            tagName: target.tagName,
-            text: (target.innerText || target.value || '').trim(),
-            disabled: !!target.disabled || target.getAttribute('aria-disabled') === 'true',
-            x: Math.round(rect.left + rect.width / 2),
-            y: Math.round(rect.top + rect.height / 2),
-            width: Math.round(rect.width),
-            height: Math.round(rect.height),
-        };
-    }""")
-    print(f"🔍 [PhonePe Continue Button Info]: {info}")
-
-    # Method 1: Playwright locator click on button (first and highest priority)
+    # 1. Keyboard Enter on currently active element
     try:
-        loc = page.locator("button:has-text('CONTINUE'), button:has-text('Continue'), button[type='submit'], [role='button']:has-text('CONTINUE')").first
-        if await loc.count() > 0:
-            await loc.click(force=True, timeout=3000)
-            print("🎯 [PhonePe Auth] Executed locator force-click on CONTINUE.")
-    except Exception as le:
-        print(f"⚠️ Locator click warning: {le}")
+        await page.keyboard.press("Enter")
+        await asyncio.sleep(0.2)
+    except Exception:
+        pass
 
-    # Method 2: Real CDP mouse click at exact center coordinates (100% trusted event)
-    if info.get("found"):
-        bx = info["x"]
-        by = info["y"]
+    # 2. Find CONTINUE button via Playwright locator
+    btn_loc = page.locator("form button:has-text('CONTINUE'), button:has-text('CONTINUE'), button:has-text('Continue'), form button[type='submit'], [aria-label*='CONTINUE' i], button:has-text('PROCEED')").first
+    clicked_locator = False
+    if await btn_loc.count() > 0:
         try:
-            await page.mouse.move(bx, by)
-            await asyncio.sleep(0.05)
-            await page.mouse.down()
-            await asyncio.sleep(0.05)
-            await page.mouse.up()
-            print(f"🎯 [PhonePe Auth] Executed real CDP mouse click at ({bx}, {by}).")
-        except Exception as me:
-            print(f"⚠️ CDP mouse click failed: {me}")
+            await btn_loc.scroll_into_view_if_needed()
+            await btn_loc.hover(timeout=2000)
+            await asyncio.sleep(0.08)
+            # Real mouse click at bounding box center
+            box = await btn_loc.bounding_box()
+            if box:
+                cx = box["x"] + box["width"] / 2
+                cy = box["y"] + box["height"] / 2
+                await page.mouse.click(cx, cy, delay=80)
+                print(f"🎯 [PhonePe Auth] Executed real mouse click at ({cx}, {cy}).")
+            # Playwright click
+            await btn_loc.click(delay=60, timeout=3000)
+            print("🎯 [PhonePe Auth] Executed locator click on CONTINUE.")
+            clicked_locator = True
+        except Exception as le:
+            print(f"⚠️ Locator click notice: {le}")
+            try:
+                await btn_loc.click(force=True, timeout=2000)
+                clicked_locator = True
+            except Exception:
+                pass
 
-    # Method 3: Native DOM click & form submit
+    # 3. Native DOM PointerEvent sequence and form submit
     await page.evaluate("""() => {
-        const btn = Array.from(document.querySelectorAll("button, [role='button'], input[type='submit']")).find(b => {
-            const t = (b.innerText || b.value || '').trim().toUpperCase();
-            return t === 'CONTINUE' || t === 'PROCEED' || t.includes('CONTINUE');
-        }) || document.querySelector("button[type='submit']");
+        const form = document.querySelector('form');
+        const buttons = Array.from(document.querySelectorAll('button, [role="button"], input[type="submit"]'));
+        const btn = buttons.find(b => (b.innerText || b.value || '').toUpperCase().includes('CONTINUE')) || (form ? form.querySelector('button') : null);
+        
         if (btn) {
             btn.removeAttribute('disabled');
-            btn.click();
-            ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'].forEach(evt => {
-                btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
-            });
-            if (btn.form) {
-                try { btn.form.requestSubmit(); } catch(e) {}
+            btn.setAttribute('aria-disabled', 'false');
+            
+            const opts = { bubbles: true, cancelable: true, view: window, pointerType: 'mouse', isPrimary: true, button: 0 };
+            btn.dispatchEvent(new PointerEvent('pointerdown', opts));
+            btn.dispatchEvent(new MouseEvent('mousedown', opts));
+            btn.dispatchEvent(new PointerEvent('pointerup', opts));
+            btn.dispatchEvent(new MouseEvent('mouseup', opts));
+            btn.dispatchEvent(new MouseEvent('click', opts));
+            
+            if (form) {
+                try { form.requestSubmit(); } catch(e) { try { form.submit(); } catch(e2) {} }
             }
         }
     }""")
 
-    # Method 4: Keyboard Enter
+    # 4. Final Enter press
     try:
         await page.keyboard.press("Enter")
     except Exception:
         pass
 
-    return {"clicked": True, "method": "multi_strategy", "info": info}
+    return {"clicked": True, "method": "multi_strategy"}
 
 
 @app.post("/api/v1/phonepe/auth/click-continue")

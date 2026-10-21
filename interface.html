@@ -679,7 +679,10 @@
                     <span style="padding:10px 14px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:8px; font-weight:600; color:#334155; display:flex; align-items:center;">+91</span>
                     <input type="tel" id="phonepeMobileInput" class="modal-input" placeholder="Enter 10-digit mobile number" maxlength="10" style="margin-bottom:0; flex:1;">
                 </div>
-                <button class="btn-modal-primary" id="sendOtpBtn" onclick="sendPhonePeOtp()" style="width:100%; margin-bottom:10px;">📲 Send OTP</button>
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <button class="btn-modal-primary" id="sendOtpBtn" onclick="sendPhonePeOtp()" style="flex:1;">📲 Send OTP</button>
+                    <button type="button" class="btn-modal-secondary" id="clickContinueBtn" onclick="triggerClickContinue()" style="background:#2563eb; color:#ffffff; border:none; padding:10px 14px; font-weight:600; border-radius:8px; cursor:pointer;" title="Click CONTINUE on PhonePe screen">▶ Click CONTINUE</button>
+                </div>
             </div>
 
             <!-- Step 2: OTP Entry -->
@@ -1407,6 +1410,36 @@
                     btn.disabled = false;
                     btn.innerText = '📲 Send OTP';
                 }
+            }
+        }
+
+        async function triggerClickContinue() {
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            const btn = document.getElementById('clickContinueBtn');
+            if (btn) btn.disabled = true;
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '🎯 Clicking CONTINUE on PhonePe screen...';
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/click-continue`, { method: 'POST' });
+                const data = await res.json();
+                refreshLiveScreenPreview();
+                if (msg) {
+                    msg.style.color = '#15803d';
+                    msg.innerText = '✅ Clicked CONTINUE! Screen refreshing...';
+                }
+                const otpStep = document.getElementById('loginStepOtp');
+                if (otpStep) otpStep.style.display = 'block';
+                setTimeout(refreshLiveScreenPreview, 1200);
+                setTimeout(refreshLiveScreenPreview, 3000);
+            } catch (e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Click error: ' + e.toString();
+                }
+            } finally {
+                if (btn) btn.disabled = false;
             }
         }
 
