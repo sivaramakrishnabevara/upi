@@ -691,6 +691,15 @@
 
             <div id="phonepeLoginStatusMsg" style="font-size:12.5px; margin-top:8px; min-height:18px;"></div>
 
+            <!-- Live Browser Preview Window -->
+            <div style="margin-top:12px; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="padding:6px 12px; background:#f1f5f9; border-bottom:1px solid #e2e8f0; font-size:12px; font-weight:600; color:#334155; display:flex; justify-content:space-between; align-items:center;">
+                    <span>📸 Live Browser Preview</span>
+                    <button type="button" onclick="refreshLiveScreenPreview()" style="background:#e2e8f0; border:none; padding:3px 8px; border-radius:4px; color:#1e40af; font-size:11px; cursor:pointer; font-weight:600;">🔄 Refresh View</button>
+                </div>
+                <img id="phonepeLiveScreenPreview" src="/api/v1/debug/screenshot" style="width:100%; max-height:230px; object-fit:contain; display:block; cursor:pointer;" alt="Live PhonePe Screen" title="Click to refresh view" onclick="refreshLiveScreenPreview()">
+            </div>
+
             <div class="modal-actions" style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
                 <button class="btn-modal-secondary" onclick="closePhonePeLoginModal()">Close</button>
                 <button class="btn-modal-secondary" onclick="checkPhonePeStatus()">🔄 Refresh Status</button>
@@ -1298,6 +1307,7 @@
             const modal = document.getElementById('phonepeLoginModal');
             if (modal) modal.classList.add('active');
             checkPhonePeStatus();
+            refreshLiveScreenPreview();
         }
 
         function closePhonePeLoginModal() {
@@ -1351,6 +1361,11 @@
                 msg.style.color = '#2563eb';
                 msg.innerText = 'Navigating to PhonePe and requesting OTP...';
             }
+
+            // Live preview updates as PhonePe loads and clicks
+            setTimeout(refreshLiveScreenPreview, 1500);
+            setTimeout(refreshLiveScreenPreview, 3500);
+            setTimeout(refreshLiveScreenPreview, 6500);
 
             try {
                 const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/send-otp`, {
