@@ -2330,11 +2330,33 @@ async def phonepe_auth_send_otp(request: Request):
                     detail=f"Phone/Mobile input field not found on {page.url}. Current page may be different."
                 )
 
-            # Fill phone number
+            # Fill phone number using both React native value setter and Playwright typing
             await phone_input.click()
             await phone_input.fill("")
-            await phone_input.type(clean_phone, delay=60)
+            await page.evaluate("""(val) => {
+                const input = document.querySelector("input[name='identifier']") || document.querySelector("input[type='text']") || document.querySelector("input[type='tel']") || document.querySelector("input");
+                if (input) {
+                    input.focus();
+                    try {
+                        const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                        nativeSetter.call(input, val);
+                    } catch(e) {
+                        input.value = val;
+                    }
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }""", clean_phone)
+            await phone_input.type(clean_phone, delay=50)
+            await page.keyboard.press("Tab")
             await asyncio.sleep(0.5)
+
+            btn_info = await page.evaluate("""() => {
+                const btn = document.querySelector("button[type='submit']") || Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE') || (b.innerText || '').toUpperCase().includes('PROCEED'));
+                if (!btn) return { exists: false, disabled: true, text: '' };
+                return { exists: true, disabled: !!btn.disabled, text: btn.innerText.trim() };
+            }""")
+            print(f"🔍 [PhonePe Auth Button Info]: {btn_info}")
 
             # 4. Click CONTINUE button
             submit_btn = None
@@ -2355,14 +2377,30 @@ async def phonepe_auth_send_otp(request: Request):
                     continue
 
             if submit_btn:
-                await submit_btn.click()
+                try:
+                    await submit_btn.click(timeout=5000)
+                except Exception:
+                    await page.evaluate("""() => {
+                        const btn = document.querySelector("button[type='submit']") || Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE'));
+                        if (btn) {
+                            btn.removeAttribute('disabled');
+                            btn.click();
+                        }
+                    }""")
                 print(f"✅ [PhonePe Auth] Clicked CONTINUE for mobile {clean_phone}.")
             else:
                 await page.keyboard.press("Enter")
                 print(f"✅ [PhonePe Auth] Pressed Enter for mobile {clean_phone}.")
 
             # 5. Wait to inspect response
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
+
+            errors_on_page = await page.evaluate("""() => {
+                const errElements = Array.from(document.querySelectorAll('[class*="error" i], [class*="alert" i], [role="alert"], [class*="warning" i], [class*="explain" i]'));
+                return errElements.map(e => e.innerText.trim()).filter(t => t.length > 2 && !t.includes('zero* cost')).join('; ');
+            }""")
+            if errors_on_page:
+                print(f"⚠️ [PhonePe Page Alert/Error]: {errors_on_page}")
 
             page_text = ""
             try:
