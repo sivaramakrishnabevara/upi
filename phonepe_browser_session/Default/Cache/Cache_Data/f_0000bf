@@ -1,0 +1,724 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/ShippingPolicy.jsx");const useEffect = __vite__cjsImport0_react["useEffect"];const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=1226e871";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=1226e871";
+import { Truck, MapPin, Clock, CheckCircle2, AlertCircle, Wrench, Sparkles, ArrowRight, ShieldCheck, Building, Zap } from "/node_modules/.vite/deps/lucide-react.js?v=1226e871";
+import PolicyNav from "/src/components/PolicyNav.jsx";
+import "/src/pages/Terms.css";
+var _jsxFileName = "C:/xampp/htdocs/GSR/src/pages/ShippingPolicy.jsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=1226e871";
+var _s = $RefreshSig$();
+export default function ShippingPolicy() {
+	_s();
+	useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+		document.title = "Shipping & Delivery Policy | GSR Broadband Eluru";
+	}, []);
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "terms-page",
+		children: [/* @__PURE__ */ _jsxDEV("section", {
+			className: "terms-hero",
+			children: [
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-hero-badge",
+					children: [/* @__PURE__ */ _jsxDEV(Sparkles, { size: 14 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 30,
+						columnNumber: 11
+					}, this), "DOORSTEP SERVICE FULFILLMENT & ACTIVATION"]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 29,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("h1", { children: ["Shipping & ", /* @__PURE__ */ _jsxDEV("span", { children: "Service Delivery" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 34,
+					columnNumber: 26
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 33,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("p", { children: [
+					"Information on fiber activation timelines, doorstep technician installation, and instant digital delivery of ",
+					/* @__PURE__ */ _jsxDEV("strong", { children: "GSR Broadband" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 38,
+						columnNumber: 43
+					}, this),
+					" services."
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 36,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-meta-info",
+					children: [
+						/* @__PURE__ */ _jsxDEV("span", { children: "Entity: GSR Broadband" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 41,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "•" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 42,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "Shipping Charges: ₹0 (Zero Courier / Delivery Fees)" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 43,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "•" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "Operational Hub: Eluru, West Godavari" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 45,
+							columnNumber: 11
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 9
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 28,
+			columnNumber: 7
+		}, this), /* @__PURE__ */ _jsxDEV("div", {
+			className: "terms-container",
+			children: [
+				/* @__PURE__ */ _jsxDEV(PolicyNav, {
+					activeKey: "shipping",
+					title: "Shipping & Delivery"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 51,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-content-card",
+					children: /* @__PURE__ */ _jsxDEV("div", {
+						className: "terms-section-block",
+						children: [
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-header-badge",
+								children: [/* @__PURE__ */ _jsxDEV("span", {
+									className: "badge-company",
+									children: "GSR BROADBAND"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 56,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("span", {
+									className: "badge-tag",
+									children: "Service Fulfillment Standard"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 55,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h2", { children: "Shipping & Service Delivery Policy" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 60,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "terms-notice-box delivery-intro-box",
+								children: [/* @__PURE__ */ _jsxDEV(Truck, { size: 24 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 63,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Service-Based Delivery Model:" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 65,
+									columnNumber: 17
+								}, this), /* @__PURE__ */ _jsxDEV("p", { children: [
+									/* @__PURE__ */ _jsxDEV("strong", { children: "GSR Broadband" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 67,
+										columnNumber: 19
+									}, this),
+									" provides high-speed telecommunications, optical fiber internet, and digital cable television services. We do not dispatch retail parcels or merchandise via third-party postal couriers. All installations and hardware deployments are performed directly at the subscriber's doorstep by authorized field technicians. ",
+									/* @__PURE__ */ _jsxDEV("strong", { children: "Zero shipping or postal courier charges apply." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 70,
+										columnNumber: 61
+									}, this)
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 66,
+									columnNumber: 17
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 64,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 62,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-highlights-grid",
+								children: [
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(Wrench, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 78,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "New Installations" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 79,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Doorstep fiber laying and router configuration executed within 2 to 3 business days." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 80,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 77,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(Zap, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 83,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "Instant Plan Renewals" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 84,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Prepaid online renewals are activated instantaneously or within 24 hours maximum." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 85,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 82,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(MapPin, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 88,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "Local Field Fleet" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 89,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Dedicated on-ground technical staff stationed in Eluru for prompt local dispatches." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 90,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 87,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 76,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "1. New Connection Onboarding & Installation" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 94,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "When a prospective customer books a new broadband or digital cable TV connection:" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 95,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("ul", {
+								className: "policy-bullet-list",
+								children: [
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 100,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Feasibility Check & Fiber Splicing:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 102,
+										columnNumber: 19
+									}, this), " Our optical engineer conducts a line check from the nearest fiber distribution hub (FDH) or optical node to your premises."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 101,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 99,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 107,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [
+										/* @__PURE__ */ _jsxDEV("strong", { children: "Installation Window:" }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 109,
+											columnNumber: 19
+										}, this),
+										" Standard residential and commercial setups are fulfilled within",
+										/* @__PURE__ */ _jsxDEV("strong", { children: " 2 to 3 working days" }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 110,
+											columnNumber: 19
+										}, this),
+										" following application verification and payment confirmation."
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 108,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 106,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 114,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Quality Speed Test:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 116,
+										columnNumber: 19
+									}, this), " The technician executes a live throughput test on-site to verify symmetrical download/upload speeds before handing over credentials."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 115,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 113,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 98,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "2. Equipment Delivery (ONT Routers & Set-Top Boxes)" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 122,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "Necessary equipment (such as Optical Network Terminals / Gigabit Wi-Fi routers, patch cords, and digital set-top boxes) is carried directly by our technician at the scheduled appointment time. Subscribers are not required to purchase or receive hardware through external shipping companies." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 123,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "3. Online Renewals & Digital Fulfillment" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 129,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "For existing subscribers renewing their ongoing monthly or annual subscriptions online:" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 130,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("ul", {
+								className: "policy-bullet-list",
+								children: [
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 135,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Immediate Restoration:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 137,
+										columnNumber: 19
+									}, this), " Subscriptions renewed through our official payment links or gateway are renewed automatically on our radius servers in real-time."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 136,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 134,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 142,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [
+										/* @__PURE__ */ _jsxDEV("strong", { children: "Maximum Window:" }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 144,
+											columnNumber: 19
+										}, this),
+										" Under any upstream synchronization delay, renewal activation takes place strictly within ",
+										/* @__PURE__ */ _jsxDEV("strong", { children: "24 hours" }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 145,
+											columnNumber: 41
+										}, this),
+										" of transaction authorization."
+									] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 143,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 141,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 149,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Digital Invoices & Receipts:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 151,
+										columnNumber: 19
+									}, this), " Official GST billing receipts and confirmation alerts are delivered electronically to your registered mobile number via SMS and WhatsApp."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 150,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 148,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 133,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "4. Operational Coverage & Service Zones" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 157,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-office-box",
+								children: [/* @__PURE__ */ _jsxDEV(MapPin, {
+									size: 26,
+									color: "#0284c7"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 159,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+									/* @__PURE__ */ _jsxDEV("h4", { children: "Verified Service Areas:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 161,
+										columnNumber: 17
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "GSR Broadband operates extensive pure optical fiber networks across Eluru municipal limits and surrounding villages in West Godavari district, Andhra Pradesh. Key active zones include:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 162,
+										columnNumber: 17
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-zones-chips",
+										children: [
+											/* @__PURE__ */ _jsxDEV("span", { children: "Powerpet" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 167,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Chunduri Vari Choultry" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 168,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "R.R. Pet" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 169,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Sanivarapupeta" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 170,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Tangellamudi" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 171,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Vangayagudem" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 172,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Ashok Nagar" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 173,
+												columnNumber: 19
+											}, this),
+											/* @__PURE__ */ _jsxDEV("span", { children: "Eluru Town & Rural Environs" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 174,
+												columnNumber: 19
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 166,
+										columnNumber: 17
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "office-address-badge",
+										children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Central Network Operations Hub:" }, void 0, false, {
+											fileName: _jsxFileName,
+											lineNumber: 177,
+											columnNumber: 19
+										}, this), " 22C-11-21, CHUNDURI VARI CHOULTRY, POWERPET, ELURU, West Godavari, Andhra Pradesh - 534002"]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 176,
+										columnNumber: 17
+									}, this)
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 160,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 158,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "refund-support-card",
+								children: [
+									/* @__PURE__ */ _jsxDEV("h4", { children: "Dispatch & Installation Coordination Desk" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 185,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "To check line feasibility at your street or schedule an installation appointment, reach out to our team:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 186,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "refund-contact-details",
+										children: [
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Dispatch Hotline:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 191,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "+91 9133397709 / 08812-234567" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 192,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 190,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Support Email:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 195,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "manikantacablenet123@gmail.com" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 196,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 194,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Field Hours:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 199,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "Mon - Sat: 9:00 AM - 8:00 PM | Sun: 10:00 AM - 5:00 PM" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 200,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 198,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Base Station:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 203,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "Powerpet Control Office, Eluru" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 204,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 202,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 189,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 184,
+								columnNumber: 13
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 54,
+						columnNumber: 11
+					}, this)
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 53,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-cta-banner",
+					children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("h3", { children: "Want High-Speed Fiber Installed at Your Doorstep?" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 214,
+						columnNumber: 13
+					}, this), /* @__PURE__ */ _jsxDEV("p", { children: "Book an appointment today. Our team will verify connection feasibility and connect your home in 48 hours." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 215,
+						columnNumber: 13
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 213,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ _jsxDEV("div", {
+						className: "terms-cta-buttons",
+						children: [/* @__PURE__ */ _jsxDEV(Link, {
+							to: "/book-connection",
+							className: "sp-btn-primary",
+							children: ["Book Connection Today ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 16 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 221,
+								columnNumber: 37
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 220,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ _jsxDEV(Link, {
+							to: "/sla-policy",
+							className: "sp-btn-secondary",
+							children: "Network SLA Standards"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 223,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 219,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 212,
+					columnNumber: 9
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 50,
+			columnNumber: 7
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 26,
+		columnNumber: 5
+	}, this);
+}
+_s(ShippingPolicy, "OD7bBpZva5O2jO+Puf00hKivP7c=");
+_c = ShippingPolicy;
+var _c;
+$RefreshReg$(_c, "ShippingPolicy");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/pages/ShippingPolicy.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/xampp/htdocs/GSR/src/pages/ShippingPolicy.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/xampp/htdocs/GSR/src/pages/ShippingPolicy.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/xampp/htdocs/GSR/src/pages/ShippingPolicy.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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Ozs7U0FDckQsd0JBQUMsS0FBRCxZQUFHLDJHQUVBOzs7OztTQUNILHdCQUFDLE9BQUQ7VUFBSyxXQUFVO29CQUFmO1dBQ0Usd0JBQUMsT0FBRCxhQUNFLHdCQUFDLFVBQUQsWUFBUSxvQkFBeUI7Ozs7cUJBQ2pDLHdCQUFDLFFBQUQsWUFBTSxnQ0FBbUM7Ozs7bUJBQ3RDOzs7OztXQUNMLHdCQUFDLE9BQUQsYUFDRSx3QkFBQyxVQUFELFlBQVEsaUJBQXNCOzs7O3FCQUM5Qix3QkFBQyxRQUFELFlBQU0saUNBQW9DOzs7O21CQUN2Qzs7Ozs7V0FDTCx3QkFBQyxPQUFELGFBQ0Usd0JBQUMsVUFBRCxZQUFRLGVBQW9COzs7O3FCQUM1Qix3QkFBQyxRQUFELFlBQU0seURBQTREOzs7O21CQUMvRDs7Ozs7V0FDTCx3QkFBQyxPQUFELGFBQ0Usd0JBQUMsVUFBRCxZQUFRLGdCQUFxQjs7OztxQkFDN0Isd0JBQUMsUUFBRCxZQUFNLGlDQUFvQzs7OzttQkFDdkM7Ozs7O1VBQ0Y7Ozs7OztRQUNGOzs7Ozs7TUFDRjs7Ozs7O0lBQ0Y7Ozs7O0lBR0wsd0JBQUMsT0FBRDtLQUFLLFdBQVU7ZUFBZixDQUNFLHdCQUFDLE9BQUQsYUFDRSx3QkFBQyxNQUFELFlBQUksb0RBQXFEOzs7O2VBQ3pELHdCQUFDLEtBQUQsWUFBRyw0R0FFQTs7OzthQUNBOzs7O2VBQ0wsd0JBQUMsT0FBRDtNQUFLLFdBQVU7Z0JBQWYsQ0FDRSx3QkFBQyxNQUFEO09BQU0sSUFBRztPQUFtQixXQUFVO2lCQUF0QyxDQUF1RCwwQkFDL0Isd0JBQUMsWUFBRCxFQUFZLE1BQU0sR0FBSzs7OztlQUN6Qzs7Ozs7Z0JBQ04sd0JBQUMsTUFBRDtPQUFNLElBQUc7T0FBYyxXQUFVO2lCQUFtQjtNQUU5Qzs7OztjQUNIOzs7OzthQUNGOzs7Ozs7R0FDRjs7Ozs7VUFDRjs7Ozs7O0FBRVQiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiU2hpcHBpbmdQb2xpY3kuanN4Il0sInZlcnNpb24iOjMsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUVmZmVjdCB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHsgTGluayB9IGZyb20gXCJyZWFjdC1yb3V0ZXItZG9tXCI7XG5pbXBvcnQge1xuICBUcnVjayxcbiAgTWFwUGluLFxuICBDbG9jayxcbiAgQ2hlY2tDaXJjbGUyLFxuICBBbGVydENpcmNsZSxcbiAgV3JlbmNoLFxuICBTcGFya2xlcyxcbiAgQXJyb3dSaWdodCxcbiAgU2hpZWxkQ2hlY2ssXG4gIEJ1aWxkaW5nLFxuICBaYXAsXG59IGZyb20gXCJsdWNpZGUtcmVhY3RcIjtcbmltcG9ydCBQb2xpY3lOYXYgZnJvbSBcIi4uL2NvbXBvbmVudHMvUG9saWN5TmF2XCI7XG5pbXBvcnQgXCIuL1Rlcm1zLmNzc1wiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTaGlwcGluZ1BvbGljeSgpIHtcbiAgdXNlRWZmZWN0KCgpID0+IHtcbiAgICB3aW5kb3cuc2Nyb2xsVG8oeyB0b3A6IDAsIGJlaGF2aW9yOiBcInNtb290aFwiIH0pO1xuICAgIGRvY3VtZW50LnRpdGxlID0gXCJTaGlwcGluZyAmIERlbGl2ZXJ5IFBvbGljeSB8IEdTUiBCcm9hZGJhbmQgRWx1cnVcIjtcbiAgfSwgW10pO1xuXG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1wYWdlXCI+XG4gICAgICB7LyogSEVSTyBTRUNUSU9OICovfVxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVybXMtaGVyb1wiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLWhlcm8tYmFkZ2VcIj5cbiAgICAgICAgICA8U3BhcmtsZXMgc2l6ZT17MTR9IC8+XG4gICAgICAgICAgRE9PUlNURVAgU0VSVklDRSBGVUxGSUxMTUVOVCAmYW1wOyBBQ1RJVkFUSU9OXG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8aDE+XG4gICAgICAgICAgU2hpcHBpbmcgJmFtcDsgPHNwYW4+U2VydmljZSBEZWxpdmVyeTwvc3Bhbj5cbiAgICAgICAgPC9oMT5cbiAgICAgICAgPHA+XG4gICAgICAgICAgSW5mb3JtYXRpb24gb24gZmliZXIgYWN0aXZhdGlvbiB0aW1lbGluZXMsIGRvb3JzdGVwIHRlY2huaWNpYW4gaW5zdGFsbGF0aW9uLFxuICAgICAgICAgIGFuZCBpbnN0YW50IGRpZ2l0YWwgZGVsaXZlcnkgb2YgPHN0cm9uZz5HU1IgQnJvYWRiYW5kPC9zdHJvbmc+IHNlcnZpY2VzLlxuICAgICAgICA8L3A+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGVybXMtbWV0YS1pbmZvXCI+XG4gICAgICAgICAgPHNwYW4+RW50aXR5OiBHU1IgQnJvYWRiYW5kPC9zcGFuPlxuICAgICAgICAgIDxzcGFuPuKAojwvc3Bhbj5cbiAgICAgICAgICA8c3Bhbj5TaGlwcGluZyBDaGFyZ2VzOiDigrkwIChaZXJvIENvdXJpZXIgLyBEZWxpdmVyeSBGZWVzKTwvc3Bhbj5cbiAgICAgICAgICA8c3Bhbj7igKI8L3NwYW4+XG4gICAgICAgICAgPHNwYW4+T3BlcmF0aW9uYWwgSHViOiBFbHVydSwgV2VzdCBHb2RhdmFyaTwvc3Bhbj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIHsvKiBQT0xJQ1kgQ09OVEFJTkVSICovfVxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jb250YWluZXJcIj5cbiAgICAgICAgPFBvbGljeU5hdiBhY3RpdmVLZXk9XCJzaGlwcGluZ1wiIHRpdGxlPVwiU2hpcHBpbmcgJiBEZWxpdmVyeVwiIC8+XG5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jb250ZW50LWNhcmRcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLXNlY3Rpb24tYmxvY2tcIj5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicG9saWN5LWhlYWRlci1iYWRnZVwiPlxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJiYWRnZS1jb21wYW55XCI+R1NSIEJST0FEQkFORDwvc3Bhbj5cbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiYmFkZ2UtdGFnXCI+U2VydmljZSBGdWxmaWxsbWVudCBTdGFuZGFyZDwvc3Bhbj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8aDI+U2hpcHBpbmcgJmFtcDsgU2VydmljZSBEZWxpdmVyeSBQb2xpY3k8L2gyPlxuXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLW5vdGljZS1ib3ggZGVsaXZlcnktaW50cm8tYm94XCI+XG4gICAgICAgICAgICAgIDxUcnVjayBzaXplPXsyNH0gLz5cbiAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICA8c3Ryb25nPlNlcnZpY2UtQmFzZWQgRGVsaXZlcnkgTW9kZWw6PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPkdTUiBCcm9hZGJhbmQ8L3N0cm9uZz4gcHJvdmlkZXMgaGlnaC1zcGVlZCB0ZWxlY29tbXVuaWNhdGlvbnMsIG9wdGljYWwgZmliZXIgaW50ZXJuZXQsXG4gICAgICAgICAgICAgICAgICBhbmQgZGlnaXRhbCBjYWJsZSB0ZWxldmlzaW9uIHNlcnZpY2VzLiBXZSBkbyBub3QgZGlzcGF0Y2ggcmV0YWlsIHBhcmNlbHMgb3IgbWVyY2hhbmRpc2UgdmlhIHRoaXJkLXBhcnR5XG4gICAgICAgICAgICAgICAgICBwb3N0YWwgY291cmllcnMuIEFsbCBpbnN0YWxsYXRpb25zIGFuZCBoYXJkd2FyZSBkZXBsb3ltZW50cyBhcmUgcGVyZm9ybWVkIGRpcmVjdGx5IGF0IHRoZSBzdWJzY3JpYmVyJmFwb3M7c1xuICAgICAgICAgICAgICAgICAgZG9vcnN0ZXAgYnkgYXV0aG9yaXplZCBmaWVsZCB0ZWNobmljaWFucy4gPHN0cm9uZz5aZXJvIHNoaXBwaW5nIG9yIHBvc3RhbCBjb3VyaWVyIGNoYXJnZXMgYXBwbHkuPC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogVEhSRUUgREVMSVZFUlkgVElFUlMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBvbGljeS1oaWdobGlnaHRzLWdyaWRcIj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktaGlnaGxpZ2h0LWNhcmRcIj5cbiAgICAgICAgICAgICAgICA8V3JlbmNoIHNpemU9ezIwfSBjbGFzc05hbWU9XCJoaWdobGlnaHQtaWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPGg0Pk5ldyBJbnN0YWxsYXRpb25zPC9oND5cbiAgICAgICAgICAgICAgICA8cD5Eb29yc3RlcCBmaWJlciBsYXlpbmcgYW5kIHJvdXRlciBjb25maWd1cmF0aW9uIGV4ZWN1dGVkIHdpdGhpbiAyIHRvIDMgYnVzaW5lc3MgZGF5cy48L3A+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBvbGljeS1oaWdobGlnaHQtY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxaYXAgc2l6ZT17MjB9IGNsYXNzTmFtZT1cImhpZ2hsaWdodC1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8aDQ+SW5zdGFudCBQbGFuIFJlbmV3YWxzPC9oND5cbiAgICAgICAgICAgICAgICA8cD5QcmVwYWlkIG9ubGluZSByZW5ld2FscyBhcmUgYWN0aXZhdGVkIGluc3RhbnRhbmVvdXNseSBvciB3aXRoaW4gMjQgaG91cnMgbWF4aW11bS48L3A+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBvbGljeS1oaWdobGlnaHQtY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxNYXBQaW4gc2l6ZT17MjB9IGNsYXNzTmFtZT1cImhpZ2hsaWdodC1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8aDQ+TG9jYWwgRmllbGQgRmxlZXQ8L2g0PlxuICAgICAgICAgICAgICAgIDxwPkRlZGljYXRlZCBvbi1ncm91bmQgdGVjaG5pY2FsIHN0YWZmIHN0YXRpb25lZCBpbiBFbHVydSBmb3IgcHJvbXB0IGxvY2FsIGRpc3BhdGNoZXMuPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8aDM+MS4gTmV3IENvbm5lY3Rpb24gT25ib2FyZGluZyAmYW1wOyBJbnN0YWxsYXRpb248L2gzPlxuICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgIFdoZW4gYSBwcm9zcGVjdGl2ZSBjdXN0b21lciBib29rcyBhIG5ldyBicm9hZGJhbmQgb3IgZGlnaXRhbCBjYWJsZSBUViBjb25uZWN0aW9uOlxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgPHVsIGNsYXNzTmFtZT1cInBvbGljeS1idWxsZXQtbGlzdFwiPlxuICAgICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlMiBzaXplPXsxNn0gY2xhc3NOYW1lPVwidGVybXMtY2hlY2staWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPkZlYXNpYmlsaXR5IENoZWNrICZhbXA7IEZpYmVyIFNwbGljaW5nOjwvc3Ryb25nPiBPdXIgb3B0aWNhbCBlbmdpbmVlciBjb25kdWN0cyBhIGxpbmUgY2hlY2tcbiAgICAgICAgICAgICAgICAgIGZyb20gdGhlIG5lYXJlc3QgZmliZXIgZGlzdHJpYnV0aW9uIGh1YiAoRkRIKSBvciBvcHRpY2FsIG5vZGUgdG8geW91ciBwcmVtaXNlcy5cbiAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUyIHNpemU9ezE2fSBjbGFzc05hbWU9XCJ0ZXJtcy1jaGVjay1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8c3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+SW5zdGFsbGF0aW9uIFdpbmRvdzo8L3N0cm9uZz4gU3RhbmRhcmQgcmVzaWRlbnRpYWwgYW5kIGNvbW1lcmNpYWwgc2V0dXBzIGFyZSBmdWxmaWxsZWQgd2l0aGluXG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPiAyIHRvIDMgd29ya2luZyBkYXlzPC9zdHJvbmc+IGZvbGxvd2luZyBhcHBsaWNhdGlvbiB2ZXJpZmljYXRpb24gYW5kIHBheW1lbnQgY29uZmlybWF0aW9uLlxuICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgICAgPGxpPlxuICAgICAgICAgICAgICAgIDxDaGVja0NpcmNsZTIgc2l6ZT17MTZ9IGNsYXNzTmFtZT1cInRlcm1zLWNoZWNrLWljb25cIiAvPlxuICAgICAgICAgICAgICAgIDxzcGFuPlxuICAgICAgICAgICAgICAgICAgPHN0cm9uZz5RdWFsaXR5IFNwZWVkIFRlc3Q6PC9zdHJvbmc+IFRoZSB0ZWNobmljaWFuIGV4ZWN1dGVzIGEgbGl2ZSB0aHJvdWdocHV0IHRlc3Qgb24tc2l0ZSB0byB2ZXJpZnlcbiAgICAgICAgICAgICAgICAgIHN5bW1ldHJpY2FsIGRvd25sb2FkL3VwbG9hZCBzcGVlZHMgYmVmb3JlIGhhbmRpbmcgb3ZlciBjcmVkZW50aWFscy5cbiAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICA8L3VsPlxuXG4gICAgICAgICAgICA8aDM+Mi4gRXF1aXBtZW50IERlbGl2ZXJ5IChPTlQgUm91dGVycyAmYW1wOyBTZXQtVG9wIEJveGVzKTwvaDM+XG4gICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgTmVjZXNzYXJ5IGVxdWlwbWVudCAoc3VjaCBhcyBPcHRpY2FsIE5ldHdvcmsgVGVybWluYWxzIC8gR2lnYWJpdCBXaS1GaSByb3V0ZXJzLCBwYXRjaCBjb3JkcywgYW5kIGRpZ2l0YWxcbiAgICAgICAgICAgICAgc2V0LXRvcCBib3hlcykgaXMgY2FycmllZCBkaXJlY3RseSBieSBvdXIgdGVjaG5pY2lhbiBhdCB0aGUgc2NoZWR1bGVkIGFwcG9pbnRtZW50IHRpbWUuIFN1YnNjcmliZXJzIGFyZSBub3RcbiAgICAgICAgICAgICAgcmVxdWlyZWQgdG8gcHVyY2hhc2Ugb3IgcmVjZWl2ZSBoYXJkd2FyZSB0aHJvdWdoIGV4dGVybmFsIHNoaXBwaW5nIGNvbXBhbmllcy5cbiAgICAgICAgICAgIDwvcD5cblxuICAgICAgICAgICAgPGgzPjMuIE9ubGluZSBSZW5ld2FscyAmYW1wOyBEaWdpdGFsIEZ1bGZpbGxtZW50PC9oMz5cbiAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICBGb3IgZXhpc3Rpbmcgc3Vic2NyaWJlcnMgcmVuZXdpbmcgdGhlaXIgb25nb2luZyBtb250aGx5IG9yIGFubnVhbCBzdWJzY3JpcHRpb25zIG9ubGluZTpcbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgIDx1bCBjbGFzc05hbWU9XCJwb2xpY3ktYnVsbGV0LWxpc3RcIj5cbiAgICAgICAgICAgICAgPGxpPlxuICAgICAgICAgICAgICAgIDxDaGVja0NpcmNsZTIgc2l6ZT17MTZ9IGNsYXNzTmFtZT1cInRlcm1zLWNoZWNrLWljb25cIiAvPlxuICAgICAgICAgICAgICAgIDxzcGFuPlxuICAgICAgICAgICAgICAgICAgPHN0cm9uZz5JbW1lZGlhdGUgUmVzdG9yYXRpb246PC9zdHJvbmc+IFN1YnNjcmlwdGlvbnMgcmVuZXdlZCB0aHJvdWdoIG91ciBvZmZpY2lhbCBwYXltZW50IGxpbmtzIG9yXG4gICAgICAgICAgICAgICAgICBnYXRld2F5IGFyZSByZW5ld2VkIGF1dG9tYXRpY2FsbHkgb24gb3VyIHJhZGl1cyBzZXJ2ZXJzIGluIHJlYWwtdGltZS5cbiAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUyIHNpemU9ezE2fSBjbGFzc05hbWU9XCJ0ZXJtcy1jaGVjay1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8c3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+TWF4aW11bSBXaW5kb3c6PC9zdHJvbmc+IFVuZGVyIGFueSB1cHN0cmVhbSBzeW5jaHJvbml6YXRpb24gZGVsYXksIHJlbmV3YWwgYWN0aXZhdGlvbiB0YWtlc1xuICAgICAgICAgICAgICAgICAgcGxhY2Ugc3RyaWN0bHkgd2l0aGluIDxzdHJvbmc+MjQgaG91cnM8L3N0cm9uZz4gb2YgdHJhbnNhY3Rpb24gYXV0aG9yaXphdGlvbi5cbiAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUyIHNpemU9ezE2fSBjbGFzc05hbWU9XCJ0ZXJtcy1jaGVjay1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8c3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+RGlnaXRhbCBJbnZvaWNlcyAmYW1wOyBSZWNlaXB0czo8L3N0cm9uZz4gT2ZmaWNpYWwgR1NUIGJpbGxpbmcgcmVjZWlwdHMgYW5kIGNvbmZpcm1hdGlvbiBhbGVydHNcbiAgICAgICAgICAgICAgICAgIGFyZSBkZWxpdmVyZWQgZWxlY3Ryb25pY2FsbHkgdG8geW91ciByZWdpc3RlcmVkIG1vYmlsZSBudW1iZXIgdmlhIFNNUyBhbmQgV2hhdHNBcHAuXG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgPC91bD5cblxuICAgICAgICAgICAgPGgzPjQuIE9wZXJhdGlvbmFsIENvdmVyYWdlICZhbXA7IFNlcnZpY2UgWm9uZXM8L2gzPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktb2ZmaWNlLWJveFwiPlxuICAgICAgICAgICAgICA8TWFwUGluIHNpemU9ezI2fSBjb2xvcj1cIiMwMjg0YzdcIiAvPlxuICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxoND5WZXJpZmllZCBTZXJ2aWNlIEFyZWFzOjwvaDQ+XG4gICAgICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgICAgICBHU1IgQnJvYWRiYW5kIG9wZXJhdGVzIGV4dGVuc2l2ZSBwdXJlIG9wdGljYWwgZmliZXIgbmV0d29ya3MgYWNyb3NzIEVsdXJ1IG11bmljaXBhbCBsaW1pdHMgYW5kIHN1cnJvdW5kaW5nXG4gICAgICAgICAgICAgICAgICB2aWxsYWdlcyBpbiBXZXN0IEdvZGF2YXJpIGRpc3RyaWN0LCBBbmRocmEgUHJhZGVzaC4gS2V5IGFjdGl2ZSB6b25lcyBpbmNsdWRlOlxuICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBvbGljeS16b25lcy1jaGlwc1wiPlxuICAgICAgICAgICAgICAgICAgPHNwYW4+UG93ZXJwZXQ8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj5DaHVuZHVyaSBWYXJpIENob3VsdHJ5PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPHNwYW4+Ui5SLiBQZXQ8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj5TYW5pdmFyYXB1cGV0YTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPlRhbmdlbGxhbXVkaTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPlZhbmdheWFndWRlbTwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPkFzaG9rIE5hZ2FyPC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPHNwYW4+RWx1cnUgVG93biAmYW1wOyBSdXJhbCBFbnZpcm9uczwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm9mZmljZS1hZGRyZXNzLWJhZGdlXCI+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPkNlbnRyYWwgTmV0d29yayBPcGVyYXRpb25zIEh1Yjo8L3N0cm9uZz4gMjJDLTExLTIxLCBDSFVORFVSSSBWQVJJIENIT1VMVFJZLCBQT1dFUlBFVCwgRUxVUlUsXG4gICAgICAgICAgICAgICAgICBXZXN0IEdvZGF2YXJpLCBBbmRocmEgUHJhZGVzaCAtIDUzNDAwMlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogRklFTEQgU1VQUE9SVCBDT05UQUNUIENBUkQgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlZnVuZC1zdXBwb3J0LWNhcmRcIj5cbiAgICAgICAgICAgICAgPGg0PkRpc3BhdGNoICZhbXA7IEluc3RhbGxhdGlvbiBDb29yZGluYXRpb24gRGVzazwvaDQ+XG4gICAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICAgIFRvIGNoZWNrIGxpbmUgZmVhc2liaWxpdHkgYXQgeW91ciBzdHJlZXQgb3Igc2NoZWR1bGUgYW4gaW5zdGFsbGF0aW9uIGFwcG9pbnRtZW50LCByZWFjaCBvdXQgdG8gb3VyIHRlYW06XG4gICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWZ1bmQtY29udGFjdC1kZXRhaWxzXCI+XG4gICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+RGlzcGF0Y2ggSG90bGluZTo8L3N0cm9uZz5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPis5MSA5MTMzMzk3NzA5IC8gMDg4MTItMjM0NTY3PC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPlN1cHBvcnQgRW1haWw6PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj5tYW5pa2FudGFjYWJsZW5ldDEyM0BnbWFpbC5jb208L3NwYW4+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+RmllbGQgSG91cnM6PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj5Nb24gLSBTYXQ6IDk6MDAgQU0gLSA4OjAwIFBNIHwgU3VuOiAxMDowMCBBTSAtIDU6MDAgUE08L3NwYW4+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+QmFzZSBTdGF0aW9uOjwvc3Ryb25nPlxuICAgICAgICAgICAgICAgICAgPHNwYW4+UG93ZXJwZXQgQ29udHJvbCBPZmZpY2UsIEVsdXJ1PC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cblxuICAgICAgICB7LyogQ1RBIEJBTk5FUiAqL31cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jdGEtYmFubmVyXCI+XG4gICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgIDxoMz5XYW50IEhpZ2gtU3BlZWQgRmliZXIgSW5zdGFsbGVkIGF0IFlvdXIgRG9vcnN0ZXA/PC9oMz5cbiAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICBCb29rIGFuIGFwcG9pbnRtZW50IHRvZGF5LiBPdXIgdGVhbSB3aWxsIHZlcmlmeSBjb25uZWN0aW9uIGZlYXNpYmlsaXR5IGFuZCBjb25uZWN0IHlvdXIgaG9tZSBpbiA0OCBob3Vycy5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLWN0YS1idXR0b25zXCI+XG4gICAgICAgICAgICA8TGluayB0bz1cIi9ib29rLWNvbm5lY3Rpb25cIiBjbGFzc05hbWU9XCJzcC1idG4tcHJpbWFyeVwiPlxuICAgICAgICAgICAgICBCb29rIENvbm5lY3Rpb24gVG9kYXkgPEFycm93UmlnaHQgc2l6ZT17MTZ9IC8+XG4gICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICA8TGluayB0bz1cIi9zbGEtcG9saWN5XCIgY2xhc3NOYW1lPVwic3AtYnRuLXNlY29uZGFyeVwiPlxuICAgICAgICAgICAgICBOZXR3b3JrIFNMQSBTdGFuZGFyZHNcbiAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgKTtcbn1cbiJdfQ==

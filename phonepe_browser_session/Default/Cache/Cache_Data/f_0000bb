@@ -1,0 +1,673 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/TermsConditions.jsx");const useEffect = __vite__cjsImport0_react["useEffect"];const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=1226e871";
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=1226e871";
+import { FileText, AlertCircle, Building2, Scale, ShieldAlert, HelpCircle, ArrowRight, Sparkles, Phone, Mail, MapPin, CheckCircle2 } from "/node_modules/.vite/deps/lucide-react.js?v=1226e871";
+import PolicyNav from "/src/components/PolicyNav.jsx";
+import "/src/pages/Terms.css";
+var _jsxFileName = "C:/xampp/htdocs/GSR/src/pages/TermsConditions.jsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=1226e871";
+var _s = $RefreshSig$();
+export default function TermsConditions() {
+	_s();
+	useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+		document.title = "Terms & Conditions | GSR Broadband Eluru";
+	}, []);
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "terms-page",
+		children: [/* @__PURE__ */ _jsxDEV("section", {
+			className: "terms-hero",
+			children: [
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-hero-badge",
+					children: [/* @__PURE__ */ _jsxDEV(Sparkles, { size: 14 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 31,
+						columnNumber: 11
+					}, this), "OFFICIAL REGULATORY & SERVICE AGREEMENT"]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 30,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("h1", { children: ["Terms & ", /* @__PURE__ */ _jsxDEV("span", { children: "Conditions" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 35,
+					columnNumber: 23
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 34,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("p", { children: [
+					"Official customer agreement, subscription rules, and service regulations for",
+					" ",
+					/* @__PURE__ */ _jsxDEV("strong", { children: "GSR Broadband" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 39,
+						columnNumber: 11
+					}, this),
+					" optical fiber, high-speed internet, and digital cable TV services."
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 37,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-meta-info",
+					children: [
+						/* @__PURE__ */ _jsxDEV("span", { children: "Entity: GSR Broadband" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 42,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "•" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 43,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "Jurisdiction: Courts at Eluru, Andhra Pradesh" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "•" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 45,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: "Effective Date: 2026 Edition" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 46,
+							columnNumber: 11
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 41,
+					columnNumber: 9
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 29,
+			columnNumber: 7
+		}, this), /* @__PURE__ */ _jsxDEV("div", {
+			className: "terms-container",
+			children: [
+				/* @__PURE__ */ _jsxDEV(PolicyNav, {
+					activeKey: "terms",
+					title: "Terms & Conditions"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 52,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-content-card",
+					children: /* @__PURE__ */ _jsxDEV("div", {
+						className: "terms-section-block",
+						children: [
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-header-badge",
+								children: [/* @__PURE__ */ _jsxDEV("span", {
+									className: "badge-company",
+									children: "GSR BROADBAND"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 57,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("span", {
+									className: "badge-tag",
+									children: "Service Agreement"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 58,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 56,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h2", { children: "Customer Terms of Service Agreement" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 61,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "terms-notice-box",
+								children: [/* @__PURE__ */ _jsxDEV(AlertCircle, { size: 22 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 64,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("p", { children: [
+									"These terms apply to the cable TV, broadband, and related services (“Services”) provided by",
+									" ",
+									/* @__PURE__ */ _jsxDEV("strong", { children: "GSR Broadband" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 67,
+										columnNumber: 17
+									}, this),
+									" (“we”, “us”), and to all payments made through this website, authorized payment gateways, or through payment links sent by us. By subscribing to or using our services, you agree to comply with and be bound by these terms."
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 65,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 63,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-highlights-grid",
+								children: [
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(Scale, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 76,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "Legally Binding" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 77,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Applies to all subscribers across Eluru and surrounding West Godavari service zones." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 78,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 75,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(Building2, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 81,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "TRAI Regulated" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 82,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Governed in strict accordance with Telecom Regulatory Authority of India guidelines." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 83,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 80,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "policy-highlight-card",
+										children: [
+											/* @__PURE__ */ _jsxDEV(ShieldAlert, {
+												size: 20,
+												className: "highlight-icon"
+											}, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 86,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("h4", { children: "Fair Usage & Security" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 87,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("p", { children: "Guaranteed 1:1 speed ratios for lawful private and commercial broadband use." }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 88,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 85,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 74,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "1. Provision of Services" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 92,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "We provide the Services at the customer's registered installation premises within our verified service area, in accordance with the specific plan selected by the customer. Channel line-ups for digital cable TV are established in coordination with content broadcasters under applicable TRAI regulations and may undergo periodic updates or revisions." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 93,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "2. Subscription and Billing Cycle" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 100,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "Services are billed on a recurring billing cycle according to the customer's chosen plan:" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 101,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("ul", {
+								className: "policy-bullet-list",
+								children: [
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 106,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Prepaid Plans:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 108,
+										columnNumber: 19
+									}, this), " Must be renewed and paid prior to the commencement of the service cycle to avoid automated service disruption."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 107,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 105,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 113,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Postpaid Plans:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 115,
+										columnNumber: 19
+									}, this), " Invoiced at the conclusion of the billing cycle and payable on or before the due date indicated on the official invoice."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 114,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 112,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(CheckCircle2, {
+										size: 16,
+										className: "terms-check-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 120,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Currency & Taxes:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 122,
+										columnNumber: 19
+									}, this), " All stated prices are in Indian Rupees (INR) and are subject to Goods and Services Tax (GST) as applicable under Indian law."] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 121,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 119,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 104,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "3. Payment Methods & Gateway Security" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 128,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: ["Payments may be made online via secure payment links powered by authorized Reserve Bank of India (RBI) compliant payment gateways (UPI, credit/debit cards, net banking, registered digital wallets), or paid in person at our Eluru office. ", /* @__PURE__ */ _jsxDEV("strong", { children: "GSR Broadband never stores sensitive payment card numbers, CVVs, or net banking passwords on its servers." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 132,
+								columnNumber: 46
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 129,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "4. Default & Non-Payment" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 135,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "If an invoice remains outstanding past the stated due date, GSR Broadband reserves the right to suspend or temporarily deactivate the Services until all pending dues are resolved in full. Restoration of de-activated services may require a standard reconnection fee as notified at the time of restoration." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 136,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "5. Customer Premises Equipment (CPE)" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 142,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "Any optical network terminal (ONT), fiber router, set-top box, or peripheral cabling supplied by GSR Broadband remains the property of the company unless purchased outright. The customer is responsible for maintaining the physical safety of the equipment and must return it upon termination or deactivation of the connection." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 143,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "6. Customer Obligations & Acceptable Use" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 149,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "Subscribers agree not to:" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 150,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("ul", {
+								className: "policy-bullet-list",
+								children: [
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(AlertCircle, {
+										size: 16,
+										className: "terms-alert-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 155,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "Resell, retransmit, or redistribute the broadband or television signal to third parties without express written authorization." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 156,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 154,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(AlertCircle, {
+										size: 16,
+										className: "terms-alert-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 159,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "Tamper with fiber optical lines, splitters, or terminal hardware." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 160,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 158,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("li", { children: [/* @__PURE__ */ _jsxDEV(AlertCircle, {
+										size: 16,
+										className: "terms-alert-icon"
+									}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 163,
+										columnNumber: 17
+									}, this), /* @__PURE__ */ _jsxDEV("span", { children: "Utilize the internet connection for any prohibited or unlawful purpose under the Information Technology Act, 2000." }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 164,
+										columnNumber: 17
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 162,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 153,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "7. Limitation of Liability" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 168,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: "GSR Broadband shall not be held liable for temporary interruptions, slowdowns, or service outages caused by force majeure events beyond our reasonable control, including municipal civil road work, power grid disruptions, extreme weather events, upstream tier-1 optical fiber cuts, or satellite broadcaster outages." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 169,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h3", { children: "8. Governing Law & Jurisdiction" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 175,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "policy-jurisdiction-box",
+								children: [/* @__PURE__ */ _jsxDEV(Building2, {
+									size: 24,
+									color: "#0284c7"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 177,
+									columnNumber: 15
+								}, this), /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Legal Jurisdiction & Dispute Resolution:" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 179,
+									columnNumber: 17
+								}, this), /* @__PURE__ */ _jsxDEV("p", { children: [
+									"This agreement is governed in all respects by the laws of India. Any legal dispute, claim, or difference arising under or in connection with this agreement shall be subject to the exclusive jurisdiction of the",
+									" ",
+									/* @__PURE__ */ _jsxDEV("strong", { children: "competent courts at Eluru, West Godavari District, Andhra Pradesh" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 183,
+										columnNumber: 19
+									}, this),
+									"."
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 180,
+									columnNumber: 17
+								}, this)] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 178,
+									columnNumber: 15
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 176,
+								columnNumber: 13
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "refund-support-card",
+								children: [
+									/* @__PURE__ */ _jsxDEV("h4", { children: "Grievance Redressal & Nodal Authority" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 190,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("p", { children: "In compliance with TRAI Quality of Service and Consumer Grievance Regulations, customers can contact our designated Nodal Desk:" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 191,
+										columnNumber: 15
+									}, this),
+									/* @__PURE__ */ _jsxDEV("div", {
+										className: "refund-contact-details",
+										children: [
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Nodal Contact:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 197,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "GSR Customer Support Desk" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 198,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 196,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Phone / WhatsApp:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 201,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "+91 9133397709 / 08812-234567" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 202,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 200,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Email:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 205,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "manikantacablenet123@gmail.com" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 206,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 204,
+												columnNumber: 17
+											}, this),
+											/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: "Registered Office:" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 209,
+												columnNumber: 19
+											}, this), /* @__PURE__ */ _jsxDEV("span", { children: "22C-11-21, CHUNDURI VARI CHOULTRY, POWERPET, ELURU - 534002" }, void 0, false, {
+												fileName: _jsxFileName,
+												lineNumber: 210,
+												columnNumber: 19
+											}, this)] }, void 0, true, {
+												fileName: _jsxFileName,
+												lineNumber: 208,
+												columnNumber: 17
+											}, this)
+										]
+									}, void 0, true, {
+										fileName: _jsxFileName,
+										lineNumber: 195,
+										columnNumber: 15
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 189,
+								columnNumber: 13
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 55,
+						columnNumber: 11
+					}, this)
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 54,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ _jsxDEV("div", {
+					className: "terms-cta-banner",
+					children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("h3", { children: "Ready to Experience High-Speed Optical Fiber?" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 220,
+						columnNumber: 13
+					}, this), /* @__PURE__ */ _jsxDEV("p", { children: "Join thousands of connected homes and businesses in Eluru with 99.9% network reliability." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 221,
+						columnNumber: 13
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 219,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ _jsxDEV("div", {
+						className: "terms-cta-buttons",
+						children: [/* @__PURE__ */ _jsxDEV(Link, {
+							to: "/book-connection",
+							className: "sp-btn-primary",
+							children: ["Book Connection ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 16 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 227,
+								columnNumber: 31
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 226,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ _jsxDEV(Link, {
+							to: "/contact",
+							className: "sp-btn-secondary",
+							children: "Contact Support"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 229,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 225,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 218,
+					columnNumber: 9
+				}, this)
+			]
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 51,
+			columnNumber: 7
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 27,
+		columnNumber: 5
+	}, this);
+}
+_s(TermsConditions, "OD7bBpZva5O2jO+Puf00hKivP7c=");
+_c = TermsConditions;
+var _c;
+$RefreshReg$(_c, "TermsConditions");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/pages/TermsConditions.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/xampp/htdocs/GSR/src/pages/TermsConditions.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/xampp/htdocs/GSR/src/pages/TermsConditions.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/xampp/htdocs/GSR/src/pages/TermsConditions.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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RCxZQUFRLFNBQWM7Ozs7cUJBQ3RCLHdCQUFDLFFBQUQsWUFBTSxpQ0FBb0M7Ozs7bUJBQ3ZDOzs7OztXQUNMLHdCQUFDLE9BQUQsYUFDRSx3QkFBQyxVQUFELFlBQVEscUJBQTBCOzs7O3FCQUNsQyx3QkFBQyxRQUFELFlBQU0sOERBQWlFOzs7O21CQUNwRTs7Ozs7VUFDRjs7Ozs7O1FBQ0Y7Ozs7OztNQUNGOzs7Ozs7SUFDRjs7Ozs7SUFHTCx3QkFBQyxPQUFEO0tBQUssV0FBVTtlQUFmLENBQ0Usd0JBQUMsT0FBRCxhQUNFLHdCQUFDLE1BQUQsWUFBSSxnREFBaUQ7Ozs7ZUFDckQsd0JBQUMsS0FBRCxZQUFHLDRGQUVBOzs7O2FBQ0E7Ozs7ZUFDTCx3QkFBQyxPQUFEO01BQUssV0FBVTtnQkFBZixDQUNFLHdCQUFDLE1BQUQ7T0FBTSxJQUFHO09BQW1CLFdBQVU7aUJBQXRDLENBQXVELG9CQUNyQyx3QkFBQyxZQUFELEVBQVksTUFBTSxHQUFLOzs7O2VBQ25DOzs7OztnQkFDTix3QkFBQyxNQUFEO09BQU0sSUFBRztPQUFXLFdBQVU7aUJBQW1CO01BRTNDOzs7O2NBQ0g7Ozs7O2FBQ0Y7Ozs7OztHQUNGOzs7OztVQUNGOzs7Ozs7QUFFVCIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJUZXJtc0NvbmRpdGlvbnMuanN4Il0sInZlcnNpb24iOjMsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUVmZmVjdCB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHsgTGluayB9IGZyb20gXCJyZWFjdC1yb3V0ZXItZG9tXCI7XG5pbXBvcnQge1xuICBGaWxlVGV4dCxcbiAgQWxlcnRDaXJjbGUsXG4gIEJ1aWxkaW5nMixcbiAgU2NhbGUsXG4gIFNoaWVsZEFsZXJ0LFxuICBIZWxwQ2lyY2xlLFxuICBBcnJvd1JpZ2h0LFxuICBTcGFya2xlcyxcbiAgUGhvbmUsXG4gIE1haWwsXG4gIE1hcFBpbixcbiAgQ2hlY2tDaXJjbGUyLFxufSBmcm9tIFwibHVjaWRlLXJlYWN0XCI7XG5pbXBvcnQgUG9saWN5TmF2IGZyb20gXCIuLi9jb21wb25lbnRzL1BvbGljeU5hdlwiO1xuaW1wb3J0IFwiLi9UZXJtcy5jc3NcIjtcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gVGVybXNDb25kaXRpb25zKCkge1xuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIHdpbmRvdy5zY3JvbGxUbyh7IHRvcDogMCwgYmVoYXZpb3I6IFwic21vb3RoXCIgfSk7XG4gICAgZG9jdW1lbnQudGl0bGUgPSBcIlRlcm1zICYgQ29uZGl0aW9ucyB8IEdTUiBCcm9hZGJhbmQgRWx1cnVcIjtcbiAgfSwgW10pO1xuXG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1wYWdlXCI+XG4gICAgICB7LyogSEVSTyBTRUNUSU9OICovfVxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwidGVybXMtaGVyb1wiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLWhlcm8tYmFkZ2VcIj5cbiAgICAgICAgICA8U3BhcmtsZXMgc2l6ZT17MTR9IC8+XG4gICAgICAgICAgT0ZGSUNJQUwgUkVHVUxBVE9SWSAmIFNFUlZJQ0UgQUdSRUVNRU5UXG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8aDE+XG4gICAgICAgICAgVGVybXMgJmFtcDsgPHNwYW4+Q29uZGl0aW9uczwvc3Bhbj5cbiAgICAgICAgPC9oMT5cbiAgICAgICAgPHA+XG4gICAgICAgICAgT2ZmaWNpYWwgY3VzdG9tZXIgYWdyZWVtZW50LCBzdWJzY3JpcHRpb24gcnVsZXMsIGFuZCBzZXJ2aWNlIHJlZ3VsYXRpb25zIGZvcntcIiBcIn1cbiAgICAgICAgICA8c3Ryb25nPkdTUiBCcm9hZGJhbmQ8L3N0cm9uZz4gb3B0aWNhbCBmaWJlciwgaGlnaC1zcGVlZCBpbnRlcm5ldCwgYW5kIGRpZ2l0YWwgY2FibGUgVFYgc2VydmljZXMuXG4gICAgICAgIDwvcD5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1tZXRhLWluZm9cIj5cbiAgICAgICAgICA8c3Bhbj5FbnRpdHk6IEdTUiBCcm9hZGJhbmQ8L3NwYW4+XG4gICAgICAgICAgPHNwYW4+4oCiPC9zcGFuPlxuICAgICAgICAgIDxzcGFuPkp1cmlzZGljdGlvbjogQ291cnRzIGF0IEVsdXJ1LCBBbmRocmEgUHJhZGVzaDwvc3Bhbj5cbiAgICAgICAgICA8c3Bhbj7igKI8L3NwYW4+XG4gICAgICAgICAgPHNwYW4+RWZmZWN0aXZlIERhdGU6IDIwMjYgRWRpdGlvbjwvc3Bhbj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIHsvKiBQT0xJQ1kgQ09OVEFJTkVSICovfVxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jb250YWluZXJcIj5cbiAgICAgICAgPFBvbGljeU5hdiBhY3RpdmVLZXk9XCJ0ZXJtc1wiIHRpdGxlPVwiVGVybXMgJiBDb25kaXRpb25zXCIgLz5cblxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLWNvbnRlbnQtY2FyZFwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGVybXMtc2VjdGlvbi1ibG9ja1wiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktaGVhZGVyLWJhZGdlXCI+XG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImJhZGdlLWNvbXBhbnlcIj5HU1IgQlJPQURCQU5EPC9zcGFuPlxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJiYWRnZS10YWdcIj5TZXJ2aWNlIEFncmVlbWVudDwvc3Bhbj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8aDI+Q3VzdG9tZXIgVGVybXMgb2YgU2VydmljZSBBZ3JlZW1lbnQ8L2gyPlxuXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRlcm1zLW5vdGljZS1ib3hcIj5cbiAgICAgICAgICAgICAgPEFsZXJ0Q2lyY2xlIHNpemU9ezIyfSAvPlxuICAgICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgICBUaGVzZSB0ZXJtcyBhcHBseSB0byB0aGUgY2FibGUgVFYsIGJyb2FkYmFuZCwgYW5kIHJlbGF0ZWQgc2VydmljZXMgKCZsZHF1bztTZXJ2aWNlcyZyZHF1bzspIHByb3ZpZGVkIGJ5e1wiIFwifVxuICAgICAgICAgICAgICAgIDxzdHJvbmc+R1NSIEJyb2FkYmFuZDwvc3Ryb25nPiAoJmxkcXVvO3dlJnJkcXVvOywgJmxkcXVvO3VzJnJkcXVvOyksIGFuZCB0byBhbGwgcGF5bWVudHMgbWFkZVxuICAgICAgICAgICAgICAgIHRocm91Z2ggdGhpcyB3ZWJzaXRlLCBhdXRob3JpemVkIHBheW1lbnQgZ2F0ZXdheXMsIG9yIHRocm91Z2ggcGF5bWVudCBsaW5rcyBzZW50IGJ5IHVzLiBCeSBzdWJzY3JpYmluZ1xuICAgICAgICAgICAgICAgIHRvIG9yIHVzaW5nIG91ciBzZXJ2aWNlcywgeW91IGFncmVlIHRvIGNvbXBseSB3aXRoIGFuZCBiZSBib3VuZCBieSB0aGVzZSB0ZXJtcy5cbiAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgIHsvKiBLRVkgSElHSExJR0hUUyBHUklEICovfVxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktaGlnaGxpZ2h0cy1ncmlkXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicG9saWN5LWhpZ2hsaWdodC1jYXJkXCI+XG4gICAgICAgICAgICAgICAgPFNjYWxlIHNpemU9ezIwfSBjbGFzc05hbWU9XCJoaWdobGlnaHQtaWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPGg0PkxlZ2FsbHkgQmluZGluZzwvaDQ+XG4gICAgICAgICAgICAgICAgPHA+QXBwbGllcyB0byBhbGwgc3Vic2NyaWJlcnMgYWNyb3NzIEVsdXJ1IGFuZCBzdXJyb3VuZGluZyBXZXN0IEdvZGF2YXJpIHNlcnZpY2Ugem9uZXMuPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktaGlnaGxpZ2h0LWNhcmRcIj5cbiAgICAgICAgICAgICAgICA8QnVpbGRpbmcyIHNpemU9ezIwfSBjbGFzc05hbWU9XCJoaWdobGlnaHQtaWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPGg0PlRSQUkgUmVndWxhdGVkPC9oND5cbiAgICAgICAgICAgICAgICA8cD5Hb3Zlcm5lZCBpbiBzdHJpY3QgYWNjb3JkYW5jZSB3aXRoIFRlbGVjb20gUmVndWxhdG9yeSBBdXRob3JpdHkgb2YgSW5kaWEgZ3VpZGVsaW5lcy48L3A+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBvbGljeS1oaWdobGlnaHQtY2FyZFwiPlxuICAgICAgICAgICAgICAgIDxTaGllbGRBbGVydCBzaXplPXsyMH0gY2xhc3NOYW1lPVwiaGlnaGxpZ2h0LWljb25cIiAvPlxuICAgICAgICAgICAgICAgIDxoND5GYWlyIFVzYWdlICZhbXA7IFNlY3VyaXR5PC9oND5cbiAgICAgICAgICAgICAgICA8cD5HdWFyYW50ZWVkIDE6MSBzcGVlZCByYXRpb3MgZm9yIGxhd2Z1bCBwcml2YXRlIGFuZCBjb21tZXJjaWFsIGJyb2FkYmFuZCB1c2UuPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8aDM+MS4gUHJvdmlzaW9uIG9mIFNlcnZpY2VzPC9oMz5cbiAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICBXZSBwcm92aWRlIHRoZSBTZXJ2aWNlcyBhdCB0aGUgY3VzdG9tZXImYXBvcztzIHJlZ2lzdGVyZWQgaW5zdGFsbGF0aW9uIHByZW1pc2VzIHdpdGhpbiBvdXIgdmVyaWZpZWQgc2VydmljZSBhcmVhLFxuICAgICAgICAgICAgICBpbiBhY2NvcmRhbmNlIHdpdGggdGhlIHNwZWNpZmljIHBsYW4gc2VsZWN0ZWQgYnkgdGhlIGN1c3RvbWVyLiBDaGFubmVsIGxpbmUtdXBzIGZvciBkaWdpdGFsIGNhYmxlIFRWXG4gICAgICAgICAgICAgIGFyZSBlc3RhYmxpc2hlZCBpbiBjb29yZGluYXRpb24gd2l0aCBjb250ZW50IGJyb2FkY2FzdGVycyB1bmRlciBhcHBsaWNhYmxlIFRSQUkgcmVndWxhdGlvbnMgYW5kIG1heVxuICAgICAgICAgICAgICB1bmRlcmdvIHBlcmlvZGljIHVwZGF0ZXMgb3IgcmV2aXNpb25zLlxuICAgICAgICAgICAgPC9wPlxuXG4gICAgICAgICAgICA8aDM+Mi4gU3Vic2NyaXB0aW9uIGFuZCBCaWxsaW5nIEN5Y2xlPC9oMz5cbiAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICBTZXJ2aWNlcyBhcmUgYmlsbGVkIG9uIGEgcmVjdXJyaW5nIGJpbGxpbmcgY3ljbGUgYWNjb3JkaW5nIHRvIHRoZSBjdXN0b21lciZhcG9zO3MgY2hvc2VuIHBsYW46XG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8dWwgY2xhc3NOYW1lPVwicG9saWN5LWJ1bGxldC1saXN0XCI+XG4gICAgICAgICAgICAgIDxsaT5cbiAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUyIHNpemU9ezE2fSBjbGFzc05hbWU9XCJ0ZXJtcy1jaGVjay1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8c3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+UHJlcGFpZCBQbGFuczo8L3N0cm9uZz4gTXVzdCBiZSByZW5ld2VkIGFuZCBwYWlkIHByaW9yIHRvIHRoZSBjb21tZW5jZW1lbnQgb2YgdGhlIHNlcnZpY2UgY3ljbGVcbiAgICAgICAgICAgICAgICAgIHRvIGF2b2lkIGF1dG9tYXRlZCBzZXJ2aWNlIGRpc3J1cHRpb24uXG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlMiBzaXplPXsxNn0gY2xhc3NOYW1lPVwidGVybXMtY2hlY2staWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPlBvc3RwYWlkIFBsYW5zOjwvc3Ryb25nPiBJbnZvaWNlZCBhdCB0aGUgY29uY2x1c2lvbiBvZiB0aGUgYmlsbGluZyBjeWNsZSBhbmQgcGF5YWJsZSBvbiBvciBiZWZvcmVcbiAgICAgICAgICAgICAgICAgIHRoZSBkdWUgZGF0ZSBpbmRpY2F0ZWQgb24gdGhlIG9mZmljaWFsIGludm9pY2UuXG4gICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlMiBzaXplPXsxNn0gY2xhc3NOYW1lPVwidGVybXMtY2hlY2staWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPkN1cnJlbmN5ICZhbXA7IFRheGVzOjwvc3Ryb25nPiBBbGwgc3RhdGVkIHByaWNlcyBhcmUgaW4gSW5kaWFuIFJ1cGVlcyAoSU5SKSBhbmQgYXJlIHN1YmplY3QgdG9cbiAgICAgICAgICAgICAgICAgIEdvb2RzIGFuZCBTZXJ2aWNlcyBUYXggKEdTVCkgYXMgYXBwbGljYWJsZSB1bmRlciBJbmRpYW4gbGF3LlxuICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgIDwvdWw+XG5cbiAgICAgICAgICAgIDxoMz4zLiBQYXltZW50IE1ldGhvZHMgJmFtcDsgR2F0ZXdheSBTZWN1cml0eTwvaDM+XG4gICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgUGF5bWVudHMgbWF5IGJlIG1hZGUgb25saW5lIHZpYSBzZWN1cmUgcGF5bWVudCBsaW5rcyBwb3dlcmVkIGJ5IGF1dGhvcml6ZWQgUmVzZXJ2ZSBCYW5rIG9mIEluZGlhIChSQkkpXG4gICAgICAgICAgICAgIGNvbXBsaWFudCBwYXltZW50IGdhdGV3YXlzIChVUEksIGNyZWRpdC9kZWJpdCBjYXJkcywgbmV0IGJhbmtpbmcsIHJlZ2lzdGVyZWQgZGlnaXRhbCB3YWxsZXRzKSwgb3IgcGFpZFxuICAgICAgICAgICAgICBpbiBwZXJzb24gYXQgb3VyIEVsdXJ1IG9mZmljZS4gPHN0cm9uZz5HU1IgQnJvYWRiYW5kIG5ldmVyIHN0b3JlcyBzZW5zaXRpdmUgcGF5bWVudCBjYXJkIG51bWJlcnMsIENWVnMsIG9yIG5ldCBiYW5raW5nIHBhc3N3b3JkcyBvbiBpdHMgc2VydmVycy48L3N0cm9uZz5cbiAgICAgICAgICAgIDwvcD5cblxuICAgICAgICAgICAgPGgzPjQuIERlZmF1bHQgJmFtcDsgTm9uLVBheW1lbnQ8L2gzPlxuICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgIElmIGFuIGludm9pY2UgcmVtYWlucyBvdXRzdGFuZGluZyBwYXN0IHRoZSBzdGF0ZWQgZHVlIGRhdGUsIEdTUiBCcm9hZGJhbmQgcmVzZXJ2ZXMgdGhlIHJpZ2h0IHRvIHN1c3BlbmQgb3JcbiAgICAgICAgICAgICAgdGVtcG9yYXJpbHkgZGVhY3RpdmF0ZSB0aGUgU2VydmljZXMgdW50aWwgYWxsIHBlbmRpbmcgZHVlcyBhcmUgcmVzb2x2ZWQgaW4gZnVsbC4gUmVzdG9yYXRpb24gb2YgZGUtYWN0aXZhdGVkXG4gICAgICAgICAgICAgIHNlcnZpY2VzIG1heSByZXF1aXJlIGEgc3RhbmRhcmQgcmVjb25uZWN0aW9uIGZlZSBhcyBub3RpZmllZCBhdCB0aGUgdGltZSBvZiByZXN0b3JhdGlvbi5cbiAgICAgICAgICAgIDwvcD5cblxuICAgICAgICAgICAgPGgzPjUuIEN1c3RvbWVyIFByZW1pc2VzIEVxdWlwbWVudCAoQ1BFKTwvaDM+XG4gICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgQW55IG9wdGljYWwgbmV0d29yayB0ZXJtaW5hbCAoT05UKSwgZmliZXIgcm91dGVyLCBzZXQtdG9wIGJveCwgb3IgcGVyaXBoZXJhbCBjYWJsaW5nIHN1cHBsaWVkIGJ5IEdTUiBCcm9hZGJhbmRcbiAgICAgICAgICAgICAgcmVtYWlucyB0aGUgcHJvcGVydHkgb2YgdGhlIGNvbXBhbnkgdW5sZXNzIHB1cmNoYXNlZCBvdXRyaWdodC4gVGhlIGN1c3RvbWVyIGlzIHJlc3BvbnNpYmxlIGZvciBtYWludGFpbmluZyB0aGVcbiAgICAgICAgICAgICAgcGh5c2ljYWwgc2FmZXR5IG9mIHRoZSBlcXVpcG1lbnQgYW5kIG11c3QgcmV0dXJuIGl0IHVwb24gdGVybWluYXRpb24gb3IgZGVhY3RpdmF0aW9uIG9mIHRoZSBjb25uZWN0aW9uLlxuICAgICAgICAgICAgPC9wPlxuXG4gICAgICAgICAgICA8aDM+Ni4gQ3VzdG9tZXIgT2JsaWdhdGlvbnMgJmFtcDsgQWNjZXB0YWJsZSBVc2U8L2gzPlxuICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgIFN1YnNjcmliZXJzIGFncmVlIG5vdCB0bzpcbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgIDx1bCBjbGFzc05hbWU9XCJwb2xpY3ktYnVsbGV0LWxpc3RcIj5cbiAgICAgICAgICAgICAgPGxpPlxuICAgICAgICAgICAgICAgIDxBbGVydENpcmNsZSBzaXplPXsxNn0gY2xhc3NOYW1lPVwidGVybXMtYWxlcnQtaWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4+UmVzZWxsLCByZXRyYW5zbWl0LCBvciByZWRpc3RyaWJ1dGUgdGhlIGJyb2FkYmFuZCBvciB0ZWxldmlzaW9uIHNpZ25hbCB0byB0aGlyZCBwYXJ0aWVzIHdpdGhvdXQgZXhwcmVzcyB3cml0dGVuIGF1dGhvcml6YXRpb24uPC9zcGFuPlxuICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICA8bGk+XG4gICAgICAgICAgICAgICAgPEFsZXJ0Q2lyY2xlIHNpemU9ezE2fSBjbGFzc05hbWU9XCJ0ZXJtcy1hbGVydC1pY29uXCIgLz5cbiAgICAgICAgICAgICAgICA8c3Bhbj5UYW1wZXIgd2l0aCBmaWJlciBvcHRpY2FsIGxpbmVzLCBzcGxpdHRlcnMsIG9yIHRlcm1pbmFsIGhhcmR3YXJlLjwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgICAgPGxpPlxuICAgICAgICAgICAgICAgIDxBbGVydENpcmNsZSBzaXplPXsxNn0gY2xhc3NOYW1lPVwidGVybXMtYWxlcnQtaWNvblwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4+VXRpbGl6ZSB0aGUgaW50ZXJuZXQgY29ubmVjdGlvbiBmb3IgYW55IHByb2hpYml0ZWQgb3IgdW5sYXdmdWwgcHVycG9zZSB1bmRlciB0aGUgSW5mb3JtYXRpb24gVGVjaG5vbG9neSBBY3QsIDIwMDAuPC9zcGFuPlxuICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgPC91bD5cblxuICAgICAgICAgICAgPGgzPjcuIExpbWl0YXRpb24gb2YgTGlhYmlsaXR5PC9oMz5cbiAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICBHU1IgQnJvYWRiYW5kIHNoYWxsIG5vdCBiZSBoZWxkIGxpYWJsZSBmb3IgdGVtcG9yYXJ5IGludGVycnVwdGlvbnMsIHNsb3dkb3ducywgb3Igc2VydmljZSBvdXRhZ2VzIGNhdXNlZCBieVxuICAgICAgICAgICAgICBmb3JjZSBtYWpldXJlIGV2ZW50cyBiZXlvbmQgb3VyIHJlYXNvbmFibGUgY29udHJvbCwgaW5jbHVkaW5nIG11bmljaXBhbCBjaXZpbCByb2FkIHdvcmssIHBvd2VyIGdyaWQgZGlzcnVwdGlvbnMsXG4gICAgICAgICAgICAgIGV4dHJlbWUgd2VhdGhlciBldmVudHMsIHVwc3RyZWFtIHRpZXItMSBvcHRpY2FsIGZpYmVyIGN1dHMsIG9yIHNhdGVsbGl0ZSBicm9hZGNhc3RlciBvdXRhZ2VzLlxuICAgICAgICAgICAgPC9wPlxuXG4gICAgICAgICAgICA8aDM+OC4gR292ZXJuaW5nIExhdyAmYW1wOyBKdXJpc2RpY3Rpb248L2gzPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJwb2xpY3ktanVyaXNkaWN0aW9uLWJveFwiPlxuICAgICAgICAgICAgICA8QnVpbGRpbmcyIHNpemU9ezI0fSBjb2xvcj1cIiMwMjg0YzdcIiAvPlxuICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxzdHJvbmc+TGVnYWwgSnVyaXNkaWN0aW9uICZhbXA7IERpc3B1dGUgUmVzb2x1dGlvbjo8L3N0cm9uZz5cbiAgICAgICAgICAgICAgICA8cD5cbiAgICAgICAgICAgICAgICAgIFRoaXMgYWdyZWVtZW50IGlzIGdvdmVybmVkIGluIGFsbCByZXNwZWN0cyBieSB0aGUgbGF3cyBvZiBJbmRpYS4gQW55IGxlZ2FsIGRpc3B1dGUsIGNsYWltLCBvciBkaWZmZXJlbmNlXG4gICAgICAgICAgICAgICAgICBhcmlzaW5nIHVuZGVyIG9yIGluIGNvbm5lY3Rpb24gd2l0aCB0aGlzIGFncmVlbWVudCBzaGFsbCBiZSBzdWJqZWN0IHRvIHRoZSBleGNsdXNpdmUganVyaXNkaWN0aW9uIG9mIHRoZXtcIiBcIn1cbiAgICAgICAgICAgICAgICAgIDxzdHJvbmc+Y29tcGV0ZW50IGNvdXJ0cyBhdCBFbHVydSwgV2VzdCBHb2RhdmFyaSBEaXN0cmljdCwgQW5kaHJhIFByYWRlc2g8L3N0cm9uZz4uXG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogR1JJRVZBTkNFIE9GRklDRVIgQk9YICovfVxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWZ1bmQtc3VwcG9ydC1jYXJkXCI+XG4gICAgICAgICAgICAgIDxoND5HcmlldmFuY2UgUmVkcmVzc2FsICZhbXA7IE5vZGFsIEF1dGhvcml0eTwvaDQ+XG4gICAgICAgICAgICAgIDxwPlxuICAgICAgICAgICAgICAgIEluIGNvbXBsaWFuY2Ugd2l0aCBUUkFJIFF1YWxpdHkgb2YgU2VydmljZSBhbmQgQ29uc3VtZXIgR3JpZXZhbmNlIFJlZ3VsYXRpb25zLCBjdXN0b21lcnMgY2FuIGNvbnRhY3Qgb3VyXG4gICAgICAgICAgICAgICAgZGVzaWduYXRlZCBOb2RhbCBEZXNrOlxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVmdW5kLWNvbnRhY3QtZGV0YWlsc1wiPlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPk5vZGFsIENvbnRhY3Q6PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj5HU1IgQ3VzdG9tZXIgU3VwcG9ydCBEZXNrPC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8c3Ryb25nPlBob25lIC8gV2hhdHNBcHA6PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgICA8c3Bhbj4rOTEgOTEzMzM5NzcwOSAvIDA4ODEyLTIzNDU2Nzwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgPHN0cm9uZz5FbWFpbDo8L3N0cm9uZz5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPm1hbmlrYW50YWNhYmxlbmV0MTIzQGdtYWlsLmNvbTwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgPHN0cm9uZz5SZWdpc3RlcmVkIE9mZmljZTo8L3N0cm9uZz5cbiAgICAgICAgICAgICAgICAgIDxzcGFuPjIyQy0xMS0yMSwgQ0hVTkRVUkkgVkFSSSBDSE9VTFRSWSwgUE9XRVJQRVQsIEVMVVJVIC0gNTM0MDAyPC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cblxuICAgICAgICB7LyogQ1RBIEJBTk5FUiAqL31cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jdGEtYmFubmVyXCI+XG4gICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgIDxoMz5SZWFkeSB0byBFeHBlcmllbmNlIEhpZ2gtU3BlZWQgT3B0aWNhbCBGaWJlcj88L2gzPlxuICAgICAgICAgICAgPHA+XG4gICAgICAgICAgICAgIEpvaW4gdGhvdXNhbmRzIG9mIGNvbm5lY3RlZCBob21lcyBhbmQgYnVzaW5lc3NlcyBpbiBFbHVydSB3aXRoIDk5LjklIG5ldHdvcmsgcmVsaWFiaWxpdHkuXG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXJtcy1jdGEtYnV0dG9uc1wiPlxuICAgICAgICAgICAgPExpbmsgdG89XCIvYm9vay1jb25uZWN0aW9uXCIgY2xhc3NOYW1lPVwic3AtYnRuLXByaW1hcnlcIj5cbiAgICAgICAgICAgICAgQm9vayBDb25uZWN0aW9uIDxBcnJvd1JpZ2h0IHNpemU9ezE2fSAvPlxuICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgPExpbmsgdG89XCIvY29udGFjdFwiIGNsYXNzTmFtZT1cInNwLWJ0bi1zZWNvbmRhcnlcIj5cbiAgICAgICAgICAgICAgQ29udGFjdCBTdXBwb3J0XG4gICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59XG4iXX0=
