@@ -691,7 +691,8 @@
 
             <div id="phonepeLoginStatusMsg" style="font-size:12.5px; margin-top:8px; min-height:18px;"></div>
 
-            <div class="modal-actions" style="margin-top:14px;">
+            <div class="modal-actions" style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap;">
+                <a href="/api/v1/debug/screenshot" target="_blank" class="btn-modal-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">📸 View Live Screen</a>
                 <button class="btn-modal-secondary" onclick="closePhonePeLoginModal()">Close</button>
                 <button class="btn-modal-secondary" onclick="checkPhonePeStatus()">🔄 Refresh Status</button>
             </div>

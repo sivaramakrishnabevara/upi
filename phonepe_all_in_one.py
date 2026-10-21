@@ -2364,10 +2364,17 @@ async def phonepe_auth_send_otp(request: Request):
             # 5. Wait to inspect response
             await asyncio.sleep(3)
 
+            page_text = ""
+            try:
+                page_text = await page.evaluate("() => document.body.innerText")
+                print(f"📄 [PhonePe Auth Page Text]:\n{page_text[:400]}")
+            except Exception:
+                pass
+
             # Check if captcha iframe appeared
             has_captcha = False
             try:
-                captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge']")
+                captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge'], div[class*='captcha' i]")
                 if captcha_el and await captcha_el.is_visible():
                     has_captcha = True
             except Exception:
@@ -2386,14 +2393,14 @@ async def phonepe_auth_send_otp(request: Request):
                 return {
                     "success": True,
                     "status": "CAPTCHA_REQUIRED",
-                    "message": "Mobile number entered, but PhonePe presented a security verification puzzle. Please solve the puzzle in the Chrome browser.",
+                    "message": "Mobile number entered, but PhonePe presented a security verification puzzle (hCaptcha). Please check /api/v1/debug/screenshot to see the screen.",
                     "phone": clean_phone,
                 }
 
             return {
                 "success": True,
                 "status": "OTP_SENT",
-                "message": f"OTP requested for mobile {clean_phone}. Please call /api/v1/phonepe/auth/verify-otp with the received OTP.",
+                "message": f"OTP requested for mobile {clean_phone}. Check /api/v1/debug/screenshot to view the browser screen.",
                 "phone": clean_phone,
                 "current_url": page.url,
             }
@@ -2403,6 +2410,15 @@ async def phonepe_auth_send_otp(request: Request):
         except Exception as e:
             print(f"❌ [PhonePe Auth] Error during send-otp: {e}")
             raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/v1/debug/screenshot")
+async def get_debug_screenshot():
+    """Returns a live screenshot of the PhonePe browser window."""
+    async with browser_lock:
+        page = await get_active_page()
+        img_bytes = await page.screenshot(type="png")
+        return Response(content=img_bytes, media_type="image/png")
 
 
 @app.post("/api/v1/phonepe/auth/verify-otp")
