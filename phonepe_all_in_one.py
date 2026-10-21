@@ -2266,12 +2266,17 @@ async def phonepe_auth_send_otp(request: Request):
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON payload. Expecting {'phone': '10-digit number'}")
 
-    clean_phone = re.sub(r"\D", "", phone_raw)
-    if len(clean_phone) != 10:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid phone number '{phone_raw}'. Must be a 10-digit Indian mobile number."
-        )
+    phone_raw = str(body.get("phone", "")).strip()
+    is_email = "@" in phone_raw and "." in phone_raw
+    if is_email:
+        clean_phone = phone_raw
+    else:
+        clean_phone = re.sub(r"\D", "", phone_raw)
+        if len(clean_phone) != 10:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid phone number '{phone_raw}'. Must be a 10-digit Indian mobile number."
+            )
 
     async with browser_lock:
         try:
@@ -2330,26 +2335,38 @@ async def phonepe_auth_send_otp(request: Request):
                     detail=f"Phone/Mobile input field not found on {page.url}. Current page may be different."
                 )
 
-            # Fill phone number using both React native value setter and Playwright typing
+            # Clear input completely using Select All + Backspace
             await phone_input.click()
+            await page.keyboard.press("Control+A")
+            await page.keyboard.press("Backspace")
             await phone_input.fill("")
-            await page.evaluate("""(val) => {
-                const input = document.querySelector("input[name='identifier']") || document.querySelector("input[type='text']") || document.querySelector("input[type='tel']") || document.querySelector("input");
-                if (input) {
-                    input.focus();
-                    try {
-                        const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-                        nativeSetter.call(input, val);
-                    } catch(e) {
-                        input.value = val;
-                    }
-                    input.dispatchEvent(new Event('input', { bubbles: true }));
-                    input.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-            }""", clean_phone)
-            await phone_input.type(clean_phone, delay=50)
+
+            # Type the 10-digit clean phone number cleanly ONCE
+            await phone_input.press_sequentially(clean_phone, delay=60)
             await page.keyboard.press("Tab")
             await asyncio.sleep(0.5)
+
+            actual_input_val = await phone_input.input_value()
+            print(f"📱 [PhonePe Auth Box Content]: '{actual_input_val}' (Length: {len(actual_input_val)})")
+
+            # Fallback if input value did not take
+            if actual_input_val != clean_phone:
+                await page.evaluate("""(val) => {
+                    const input = document.querySelector("input[name='identifier']") || document.querySelector("input[type='text']") || document.querySelector("input[type='tel']") || document.querySelector("input");
+                    if (input) {
+                        input.focus();
+                        try {
+                            const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                            nativeSetter.call(input, val);
+                        } catch(e) {
+                            input.value = val;
+                        }
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }""", clean_phone)
+                await page.keyboard.press("Tab")
+                await asyncio.sleep(0.5)
 
             btn_info = await page.evaluate("""() => {
                 const btn = document.querySelector("button[type='submit']") || Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE') || (b.innerText || '').toUpperCase().includes('PROCEED'));
@@ -2424,6 +2441,14 @@ async def phonepe_auth_send_otp(request: Request):
                     "status": "LOGGED_IN",
                     "message": "PhonePe Business logged in successfully!",
                     "current_url": page.url,
+                    "phone": clean_phone,
+                }
+
+            if errors_on_page and not has_captcha:
+                return {
+                    "success": False,
+                    "status": "VALIDATION_ERROR",
+                    "message": f"PhonePe says: {errors_on_page}",
                     "phone": clean_phone,
                 }
 
