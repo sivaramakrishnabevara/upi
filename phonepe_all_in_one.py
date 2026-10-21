@@ -74,21 +74,28 @@ BROWSER_ARGS = [
 ]
 
 STEALTH_JS = """
-    // Bypass navigator.webdriver detection
-    Object.defineProperty(navigator, 'webdriver', {
-        get: () => undefined
-    });
-    // Spoof chrome runtime object
-    window.chrome = window.chrome || {};
-    window.chrome.runtime = window.chrome.runtime || {};
-    // Spoof plugins & languages
-    Object.defineProperty(navigator, 'plugins', {
-        get: () => [1, 2, 3, 4, 5]
-    });
-    Object.defineProperty(navigator, 'languages', {
-        get: () => ['en-US', 'en', 'te', 'hi']
-    });
+    // Bypass navigator.webdriver detection cleanly
+    try {
+        const newProto = Object.getPrototypeOf(navigator);
+        delete newProto.webdriver;
+    } catch(e) {}
+    
+    // Realistic window.chrome runtime object
+    window.chrome = window.chrome || {
+        app: { isInstalled: false },
+        runtime: {
+            OnInstalledReason: {},
+            OnRestartRequiredReason: {},
+            PlatformArch: {},
+            PlatformNaclArch: {},
+            PlatformOs: {},
+            RequestUpdateCheckStatus: {}
+        },
+        loadTimes: function() {},
+        csi: function() {}
+    };
 """
+
 
 
 def find_chrome_executable():
@@ -181,7 +188,48 @@ async def get_stealth_browser_context(playwright, headless: bool = None):
             **launch_kwargs
         )
     await context.add_init_script(STEALTH_JS)
+
+    # Automatically load authenticated session if session_state.json exists
+    session_file = os.path.join(PROFILE_DIR, "session_state.json")
+    if not os.path.exists(session_file):
+        # Also check root workspace
+        alt_session = os.path.join(BASE_DIR, "session_state.json")
+        if os.path.exists(alt_session):
+            session_file = alt_session
+
+    if os.path.exists(session_file):
+        try:
+            with open(session_file, "r", encoding="utf-8") as sf:
+                saved_state = json.load(sf)
+            cookies = saved_state.get("cookies", [])
+            if cookies:
+                await context.add_cookies(cookies)
+            origins = saved_state.get("origins", [])
+            local_items = {}
+            for orig in origins:
+                if "phonepe.com" in orig.get("origin", ""):
+                    for item in orig.get("localStorage", []):
+                        local_items[item["name"]] = item["value"]
+            session_items = saved_state.get("sessionStorage", {})
+            inject_storage = f"""
+                try {{
+                    const localData = {json.dumps(local_items)};
+                    for (const [k, v] of Object.entries(localData)) {{
+                        window.localStorage.setItem(k, v);
+                    }}
+                    const sessionData = {json.dumps(session_items)};
+                    for (const [k, v] of Object.entries(sessionData)) {{
+                        window.sessionStorage.setItem(k, v);
+                    }}
+                }} catch(e) {{}}
+            """
+            await context.add_init_script(inject_storage)
+            print(f"🔑 [Session Loader] Automatically restored PhonePe session ({len(cookies)} cookies) from session_state.json!")
+        except Exception as sle:
+            print(f"⚠️ [Session Loader] Notice reading session_state.json: {sle}")
+
     return context
+
 
 
 # Global browser instances for FastAPI lifespan
@@ -2464,12 +2512,16 @@ async def phonepe_auth_send_otp(request: Request):
                         "phone": clean_phone,
                     }
 
-                # Check if captcha appeared
+                # Check if captcha or challenge frame appeared
                 try:
-                    captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge'], div[class*='captcha' i]")
-                    if captcha_el and await captcha_el.is_visible():
-                        has_captcha = True
-                        break
+                    for f in page.frames:
+                        if "challenge" in f.url or "hcaptcha" in f.url:
+                            has_captcha = True
+                            break
+                    if not has_captcha:
+                        captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge'], div[class*='captcha' i]")
+                        if captcha_el:
+                            has_captcha = True
                 except Exception:
                     pass
 
@@ -2507,10 +2559,11 @@ async def phonepe_auth_send_otp(request: Request):
 
             if has_captcha:
                 return {
-                    "success": True,
+                    "success": False,
                     "status": "CAPTCHA_REQUIRED",
-                    "message": "Mobile number entered, but PhonePe presented a security verification puzzle (hCaptcha). Please check /api/v1/debug/screenshot to see the screen.",
+                    "message": "PhonePe security check (hCaptcha 429 Rate Limit) detected on server. Please use 'Import Session' to transfer your authenticated session from local Chrome.",
                     "phone": clean_phone,
+                    "hcaptcha_blocked": True
                 }
 
             return {
@@ -2534,7 +2587,7 @@ async def click_continue_on_page(page) -> dict:
     1. Presses Enter on focused form input
     2. Uses Playwright locator to scroll, hover, and click with delay
     3. Issues real OS-level mouse click via page.mouse.click at exact button center
-    4. Dispatches native PointerEvent and Form submit
+    4. Dispatches native PointerEvent and MouseEvent sequence (WITHOUT form.submit to protect React SPA)
     """
     # 1. Keyboard Enter on currently active element
     try:
@@ -2570,11 +2623,10 @@ async def click_continue_on_page(page) -> dict:
             except Exception:
                 pass
 
-    # 3. Native DOM PointerEvent sequence and form submit
+    # 3. Native DOM PointerEvent & MouseEvent sequence (No form.submit to avoid page refresh)
     await page.evaluate("""() => {
-        const form = document.querySelector('form');
         const buttons = Array.from(document.querySelectorAll('button, [role="button"], input[type="submit"]'));
-        const btn = buttons.find(b => (b.innerText || b.value || '').toUpperCase().includes('CONTINUE')) || (form ? form.querySelector('button') : null);
+        const btn = buttons.find(b => (b.innerText || b.value || '').toUpperCase().includes('CONTINUE')) || document.querySelector("button[type='submit']");
         
         if (btn) {
             btn.removeAttribute('disabled');
@@ -2586,10 +2638,7 @@ async def click_continue_on_page(page) -> dict:
             btn.dispatchEvent(new PointerEvent('pointerup', opts));
             btn.dispatchEvent(new MouseEvent('mouseup', opts));
             btn.dispatchEvent(new MouseEvent('click', opts));
-            
-            if (form) {
-                try { form.requestSubmit(); } catch(e) { try { form.submit(); } catch(e2) {} }
-            }
+            try { btn.click(); } catch(e) {}
         }
     }""")
 
@@ -2615,6 +2664,111 @@ async def phonepe_auth_click_continue():
             "current_url": page.url,
             "message": "Clicked CONTINUE button on PhonePe page."
         }
+
+
+@app.get("/api/v1/session/export")
+async def export_session_endpoint():
+    """Exports active cookies and storage into downloadable JSON for easy server transfer."""
+    async with browser_lock:
+        page = await get_active_page()
+        context = page.context
+        cookies = await context.cookies()
+        try:
+            local_s = await page.evaluate("() => JSON.parse(JSON.stringify(window.localStorage))")
+            session_s = await page.evaluate("() => JSON.parse(JSON.stringify(window.sessionStorage))")
+        except Exception:
+            local_s = {}
+            session_s = {}
+
+        full_data = {
+            "cookies": cookies,
+            "origins": [
+                {
+                    "origin": "https://business.phonepe.com",
+                    "localStorage": [{"name": k, "value": v} for k, v in local_s.items()]
+                }
+            ],
+            "sessionStorage": session_s,
+            "exported_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "current_url": page.url
+        }
+        return JSONResponse(
+            content=full_data,
+            headers={"Content-Disposition": "attachment; filename=phonepe_session.json"}
+        )
+
+
+@app.post("/api/v1/session/import")
+async def import_session_endpoint(request: Request):
+    """
+    Imports session_state JSON into active browser context,
+    bypassing login/hCaptcha, and immediately opens the PhonePe Dashboard.
+    """
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid JSON format. Expecting session_state object.")
+
+    if not isinstance(data, dict) or "cookies" not in data:
+        raise HTTPException(status_code=400, detail="Missing 'cookies' in session payload.")
+
+    async with browser_lock:
+        page = await get_active_page()
+        context = page.context
+
+        # 1. Add cookies
+        cookies = data.get("cookies", [])
+        if cookies:
+            await context.add_cookies(cookies)
+
+        # 2. Add storage injection
+        origins = data.get("origins", [])
+        local_items = {}
+        for orig in origins:
+            if "phonepe.com" in orig.get("origin", ""):
+                for item in orig.get("localStorage", []):
+                    local_items[item["name"]] = item["value"]
+        session_items = data.get("sessionStorage", {})
+
+        inject_storage = f"""
+            try {{
+                const localData = {json.dumps(local_items)};
+                for (const [k, v] of Object.entries(localData)) {{
+                    window.localStorage.setItem(k, v);
+                }}
+                const sessionData = {json.dumps(session_items)};
+                for (const [k, v] of Object.entries(sessionData)) {{
+                    window.sessionStorage.setItem(k, v);
+                }}
+            }} catch(e) {{}}
+        """
+        await context.add_init_script(inject_storage)
+        try:
+            await page.evaluate(inject_storage)
+        except Exception:
+            pass
+
+        # 3. Save to disk so restarts persist
+        os.makedirs(PROFILE_DIR, exist_ok=True)
+        session_path = os.path.join(PROFILE_DIR, "session_state.json")
+        with open(session_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+
+        # 4. Navigate directly to transactions live
+        try:
+            await page.goto(PHONEPE_LIVE_URL, wait_until="networkidle", timeout=15000)
+        except Exception:
+            await page.goto(PHONEPE_LIVE_URL, timeout=8000)
+
+        is_logged_in = "/dashboard" in page.url or "/transactions" in page.url
+
+        return {
+            "success": is_logged_in,
+            "current_url": page.url,
+            "status": "LOGGED_IN" if is_logged_in else "CHECK_URL",
+            "message": "🎉 Session imported successfully! PhonePe Dashboard is now active." if is_logged_in else f"Session imported, current page: {page.url}"
+        }
+
 
 
 @app.get("/api/v1/debug/screenshot")
@@ -3343,8 +3497,67 @@ async def run_sync_db_cli():
 
 # ==============================================================================
 # MAIN ENTRYPOINT & CLI DISPATCHER
+async def run_export_session_cli(output_path: str = "session_state.json"):
+    """CLI utility to export active PhonePe session from browser to JSON."""
+    print("📤 Connecting to active browser to export PhonePe authenticated session...")
+    async with async_playwright() as p:
+        context = None
+        if is_cdp_port_open(9222):
+            try:
+                browser = await p.chromium.connect_over_cdp("http://127.0.0.1:9222")
+                context = browser.contexts[0]
+                print("🔗 Connected to native Google Chrome on port 9222.")
+            except Exception as e:
+                print(f"⚠️ CDP notice: {e}")
+
+        if not context:
+            context = await get_stealth_browser_context(p, headless=False)
+
+        cookies = await context.cookies()
+        pages = [pg for pg in context.pages if not pg.is_closed()]
+        phonepe_page = None
+        for pg in pages:
+            if "phonepe.com" in pg.url:
+                phonepe_page = pg
+                break
+        if not phonepe_page and pages:
+            phonepe_page = pages[0]
+
+        local_s = {}
+        session_s = {}
+        if phonepe_page:
+            try:
+                local_s = await phonepe_page.evaluate("() => JSON.parse(JSON.stringify(window.localStorage))")
+                session_s = await phonepe_page.evaluate("() => JSON.parse(JSON.stringify(window.sessionStorage))")
+            except Exception:
+                pass
+
+        full_data = {
+            "cookies": cookies,
+            "origins": [
+                {
+                    "origin": "https://business.phonepe.com",
+                    "localStorage": [{"name": k, "value": v} for k, v in local_s.items()]
+                }
+            ],
+            "sessionStorage": session_s,
+            "exported_at": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        os.makedirs(PROFILE_DIR, exist_ok=True)
+        paths_to_save = [output_path, os.path.join(PROFILE_DIR, "session_state.json")]
+        for pth in paths_to_save:
+            with open(pth, "w", encoding="utf-8") as f:
+                json.dump(full_data, f, indent=2)
+
+        print(f"🎉 Session exported successfully to {output_path} and {os.path.join(PROFILE_DIR, 'session_state.json')}!")
+        print(f"   Contains: {len(cookies)} cookies and {len(local_s)} localStorage items.")
+        print(f"👉 You can now transfer '{output_path}' to your server or upload it via Web UI!\n")
+
+
 # ==============================================================================
 def main():
+
     parser = argparse.ArgumentParser(
         description="PhonePe Business All-in-One Automation System"
     )
@@ -3411,6 +3624,11 @@ def main():
         default=os.environ.get("WEB_APP_PASSWORD", "admin123"),
         help="Password for the Web Book interface (default: admin123)",
     )
+    parser.add_argument(
+        "--export-session",
+        action="store_true",
+        help="Export active PhonePe session from browser to session_state.json for server transfer",
+    )
 
     args = parser.parse_args()
 
@@ -3422,8 +3640,11 @@ def main():
     if args.password:
         GLOBAL_WEB_PASSWORD = args.password
 
-    if args.login:
+    if args.export_session:
+        asyncio.run(run_export_session_cli())
+    elif args.login:
         run_interactive_login()
+
     elif args.server:
         print(f"🌟 Starting PhonePe FastAPI Server on http://{args.host}:{args.port}")
         if GLOBAL_WEBHOOK_URL:

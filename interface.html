@@ -694,7 +694,23 @@
 
             <div id="phonepeLoginStatusMsg" style="font-size:12.5px; margin-top:8px; min-height:18px;"></div>
 
+            <!-- ⚡ 1-Click Session Transfer (Bypass Cloud hCaptcha) -->
+            <div style="margin-top:12px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px;">
+                <div style="font-weight:700; color:#166534; font-size:12.5px; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                    <span>⚡ 1-Click Session Transfer (Recommended for Servers)</span>
+                </div>
+                <p style="font-size:11.5px; color:#15803d; line-height:1.4; margin-bottom:8px;">
+                    Cloud server IPs are blocked by PhonePe's hCaptcha. Import your active session JSON here to log in instantly without OTP or captcha!
+                </p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button type="button" onclick="exportActiveSession()" class="btn-modal-secondary" style="font-size:11.5px; padding:6px 12px; background:#ffffff; border:1px solid #cbd5e1; cursor:pointer;" title="Download active session JSON">📤 Export Session</button>
+                    <button type="button" onclick="triggerSessionFileInput()" class="btn-modal-primary" style="font-size:11.5px; padding:6px 14px; background:#16a34a; border:none; color:#fff; cursor:pointer;" title="Upload session JSON from local computer">📥 Import Session File</button>
+                    <input type="file" id="sessionFileInput" accept=".json" style="display:none;" onchange="handleSessionFileUpload(event)">
+                </div>
+            </div>
+
             <!-- Live Browser Preview Window -->
+
             <div style="margin-top:12px; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
                 <div style="padding:6px 12px; background:#f1f5f9; border-bottom:1px solid #e2e8f0; font-size:12px; font-weight:600; color:#334155; display:flex; justify-content:space-between; align-items:center;">
                     <span>📸 Live Browser Preview</span>
@@ -1531,6 +1547,68 @@
                 }
             }
         }
+
+        async function exportActiveSession() {
+            try {
+                window.location.href = `${API_BASE}/api/v1/session/export`;
+                showToast('📤 Downloading active PhonePe session...');
+            } catch (e) {
+                alert('Export failed: ' + e);
+            }
+        }
+
+        function triggerSessionFileInput() {
+            const input = document.getElementById('sessionFileInput');
+            if (input) input.click();
+        }
+
+        async function handleSessionFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '📥 Importing session file and activating dashboard...';
+            }
+
+            try {
+                const text = await file.text();
+                const sessionJson = JSON.parse(text);
+
+                const res = await fetch(`${API_BASE}/api/v1/session/import`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(sessionJson)
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    if (msg) {
+                        msg.style.color = '#15803d';
+                        msg.innerText = '🎉 ' + (data.message || 'Session imported successfully!');
+                    }
+                    showToast('🎉 Session imported! PhonePe is now active.');
+                    checkPhonePeStatus();
+                    refreshLiveScreenPreview();
+                    setTimeout(checkPhonePeStatus, 2000);
+                    setTimeout(refreshLiveScreenPreview, 3000);
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '❌ ' + (data.message || data.detail || 'Failed to import session.');
+                    }
+                }
+            } catch (err) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Invalid session file: ' + err.toString();
+                }
+            } finally {
+                event.target.value = '';
+            }
+        }
+
 
         function refreshLiveScreenPreview() {
             const img = document.getElementById('phonepeLiveScreenPreview');

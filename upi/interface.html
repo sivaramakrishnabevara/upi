@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhonePe Business Transactions Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5f259f;
+            --primary-light: #7c3aed;
+            --primary-dark: #4a1d7c;
+            --accent: #a855f7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --success-bg: #dcfce7;
+            --radius: 14px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px -5px rgba(95, 37, 159, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 28px 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1480px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            padding: 24px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .header-title p {
+            color: #e9d5ff;
+            font-size: 13.5px;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .btn {
+            background: #ffffff;
+            color: var(--primary);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 16px;
+            border-radius: 9px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-live {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            cursor: default;
+        }
+
+        .btn-live:hover {
+            transform: none;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #4ade80;
+            animation: pulseDot 1.8s infinite;
+        }
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.85);
+            }
+        }
+
+        .btn-sync {
+            background: #16a34a;
+            color: #ffffff;
+        }
+
+        .btn-sync:hover {
+            background: #15803d;
+        }
+
+        /* Stats Section */
+        /* Stats Section - Matched to PhonePe Business Portal */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 960px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 18px 22px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 110px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+
+        .card-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-label-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metric-icon-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .metric-icon-green {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #d1fae5;
+        }
+
+        .metric-icon-purple {
+            background: #f3e8ff;
+            color: #7c3aed;
+            border: 1px solid #e9d5ff;
+        }
+
+        .metric-icon-blue {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #dbeafe;
+        }
+
+        .card-title-text {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .card-info-icon {
+            font-size: 13px;
+            color: #94a3b8;
+            cursor: pointer;
+            border: 1px solid #cbd5e1;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: serif;
+            font-style: italic;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+
+        .card-info-icon:hover {
+            color: #475569;
+            border-color: #94a3b8;
+        }
+
+        .card-metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            margin-top: 8px;
+        }
+
+        .card-metric-value .sub-denom {
+            font-size: 18px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background: var(--card-bg);
+            padding: 14px 22px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 520px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px 10px 38px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 13.5px;
+            outline: none;
+            transition: all 0.2s ease;
+            background: #f8fafc;
+        }
+
+        .search-box input:focus {
+            background: #ffffff;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 15px;
+            pointer-events: none;
+        }
+
+        .count-badge {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .count-badge span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Table Card */
+        .table-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            max-height: 750px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13.5px;
+        }
+
+        thead th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            padding: 14px 18px;
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+            letter-spacing: 0.2px;
+        }
+
+        thead th.highlight-col {
+            background: #f5f0fb;
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s ease, opacity 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: #faf8fe;
+        }
+
+        tbody tr.row-new {
+            animation: highlightFade 4s ease-out;
+        }
+
+        @keyframes highlightFade {
+            0% {
+                background: #dcfce7;
+            }
+
+            100% {
+                background: transparent;
+            }
+        }
+
+        tbody td {
+            padding: 13px 18px;
+            vertical-align: middle;
+            color: #334155;
+        }
+
+        .note-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f3e8ff;
+            color: #6b21a8;
+            border: 1px solid #d8b4fe;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            max-width: 260px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .note-badge:hover {
+            background: #ede9fe;
+            border-color: #c084fc;
+        }
+
+        .id-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #475569;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: color 0.15s ease;
+        }
+
+        .id-badge:hover {
+            color: var(--primary);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 2px;
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+            opacity: 0.55;
+            transition: opacity 0.15s;
+            font-size: 12px;
+        }
+
+        .copy-btn:hover {
+            opacity: 1;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-pending {
+            background: #fef9c3;
+            color: #a16207;
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .amount-text {
+            font-weight: 700;
+            font-size: 14.5px;
+            color: #0f172a;
+            white-space: nowrap;
+        }
+
+        /* Modal Dialogs */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 90%;
+            max-width: 520px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 14px;
+        }
+
+        .modal-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(95, 37, 159, 0.12);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-modal-primary {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 9px;
+            border: none;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-modal-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-modal-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 10px 16px;
+            border-radius: 9px;
+            border: none;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0f172a;
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 99999;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Security Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <div class="modal-title"><span>🔒</span> Security Access Required</div>
+            <div class="modal-desc">Please enter your authorization password to access the PhonePe Web Book transactions ledger.</div>
+            <input type="password" id="loginPasswordInput" class="modal-input" placeholder="Enter password (default: admin123)" onkeydown="if(event.key==='Enter')doLogin()">
+            <div id="loginErrorMsg" style="color:#dc2626; font-size:13px; margin-bottom:12px; display:none;">⚠️ Invalid password. Please try again.</div>
+            <div class="modal-actions">
+                <button class="btn-modal-primary" onclick="doLogin()">Unlock Web Book</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Webhook Settings Modal -->
+    <div class="modal-overlay" id="webhookModal">
+        <div class="modal-card">
+            <div class="modal-title"><span>🔗</span> Outgoing Webhook Settings</div>
+            <div class="modal-desc">Whenever a live PhonePe payment is received and saved to MySQL, an instant HTTP POST event will be dispatched to this URL.</div>
+            <label style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Target Webhook URL</label>
+            <input type="url" id="webhookUrlInput" class="modal-input" placeholder="https://your-domain.com/api/payment-webhook">
+            <div id="webhookStatusMsg" style="font-size:12.5px; margin-bottom:14px; min-height:18px;"></div>
+            <div class="modal-actions">
+                <button class="btn-modal-secondary" onclick="closeWebhookModal()">Cancel</button>
+                <button class="btn-modal-secondary" onclick="testWebhook()">🧪 Test Ping</button>
+                <button class="btn-modal-primary" onclick="saveWebhook()">Save Webhook</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PhonePe Business Portal Login & OTP Modal -->
+    <div class="modal-overlay" id="phonepeLoginModal">
+        <div class="modal-card">
+            <div class="modal-title"><span>🔑</span> PhonePe Business Login</div>
+            <div class="modal-desc">If your PhonePe Business portal logs out, enter your 10-digit mobile number to request an OTP, then enter the OTP to re-authenticate automatically.</div>
+            
+            <div id="phonepeAuthStatusBadge" style="margin-bottom:12px; font-size:12.5px; padding:6px 12px; border-radius:6px; background:#f1f5f9; color:#475569; display:inline-block; font-weight:600;">
+                Checking session status...
+            </div>
+
+            <!-- Step 1: Phone Number -->
+            <div id="loginStepPhone">
+                <label style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">PhonePe Registered Mobile Number</label>
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <span style="padding:10px 14px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:8px; font-weight:600; color:#334155; display:flex; align-items:center;">+91</span>
+                    <input type="tel" id="phonepeMobileInput" class="modal-input" placeholder="Enter 10-digit mobile number" maxlength="10" style="margin-bottom:0; flex:1;">
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <button class="btn-modal-primary" id="sendOtpBtn" onclick="sendPhonePeOtp()" style="flex:1;">📲 Send OTP</button>
+                    <button type="button" class="btn-modal-secondary" id="clickContinueBtn" onclick="triggerClickContinue()" style="background:#2563eb; color:#ffffff; border:none; padding:10px 14px; font-weight:600; border-radius:8px; cursor:pointer;" title="Click CONTINUE on PhonePe screen">▶ Click CONTINUE</button>
+                </div>
+            </div>
+
+            <!-- Step 2: OTP Entry -->
+            <div id="loginStepOtp" style="display:none; margin-top:12px; padding-top:12px; border-top:1px dashed #e2e8f0;">
+                <label style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Enter Received OTP</label>
+                <input type="text" id="phonepeOtpInput" class="modal-input" placeholder="Enter 5 or 6 digit OTP" maxlength="6" style="letter-spacing:4px; font-weight:bold; font-size:18px; text-align:center;">
+                <button class="btn-modal-primary" id="verifyOtpBtn" onclick="verifyPhonePeOtp()" style="width:100%; margin-bottom:10px;">✅ Verify OTP & Log In</button>
+            </div>
+
+            <div id="phonepeLoginStatusMsg" style="font-size:12.5px; margin-top:8px; min-height:18px;"></div>
+
+            <!-- ⚡ 1-Click Session Transfer (Bypass Cloud hCaptcha) -->
+            <div style="margin-top:12px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px;">
+                <div style="font-weight:700; color:#166534; font-size:12.5px; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                    <span>⚡ 1-Click Session Transfer (Recommended for Servers)</span>
+                </div>
+                <p style="font-size:11.5px; color:#15803d; line-height:1.4; margin-bottom:8px;">
+                    Cloud server IPs are blocked by PhonePe's hCaptcha. Import your active session JSON here to log in instantly without OTP or captcha!
+                </p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button type="button" onclick="exportActiveSession()" class="btn-modal-secondary" style="font-size:11.5px; padding:6px 12px; background:#ffffff; border:1px solid #cbd5e1; cursor:pointer;" title="Download active session JSON">📤 Export Session</button>
+                    <button type="button" onclick="triggerSessionFileInput()" class="btn-modal-primary" style="font-size:11.5px; padding:6px 14px; background:#16a34a; border:none; color:#fff; cursor:pointer;" title="Upload session JSON from local computer">📥 Import Session File</button>
+                    <input type="file" id="sessionFileInput" accept=".json" style="display:none;" onchange="handleSessionFileUpload(event)">
+                </div>
+            </div>
+
+            <!-- Live Browser Preview Window -->
+
+            <div style="margin-top:12px; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="padding:6px 12px; background:#f1f5f9; border-bottom:1px solid #e2e8f0; font-size:12px; font-weight:600; color:#334155; display:flex; justify-content:space-between; align-items:center;">
+                    <span>📸 Live Browser Preview</span>
+                    <button type="button" onclick="refreshLiveScreenPreview()" style="background:#e2e8f0; border:none; padding:3px 8px; border-radius:4px; color:#1e40af; font-size:11px; cursor:pointer; font-weight:600;">🔄 Refresh View</button>
+                </div>
+                <img id="phonepeLiveScreenPreview" src="/api/v1/debug/screenshot" style="width:100%; max-height:230px; object-fit:contain; display:block; cursor:pointer;" alt="Live PhonePe Screen" title="Click to refresh view" onclick="refreshLiveScreenPreview()">
+            </div>
+
+            <div class="modal-actions" style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
+                <button class="btn-modal-secondary" onclick="closePhonePeLoginModal()">Close</button>
+                <button class="btn-modal-secondary" onclick="checkPhonePeStatus()">🔄 Refresh Status</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-title">
+                <h1><span>🟣</span> PhonePe Web Book — Live Digital Passbook</h1>
+                <p>Real-time transaction ledger with UPI Notes, Instant Webhook Notifications & MySQL Storage</p>
+            </div>
+            <div class="header-actions">
+                <div class="btn btn-live"
+                    style="background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); color: #dcfce7; cursor: default;">
+                    <span
+                        style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px #22c55e;"></span>
+                    <span> Active</span>
+                </div>
+                <button class="btn" onclick="openPhonePeLoginModal()">🔑 PhonePe Login</button>
+                <button class="btn" onclick="openWebhookModal()">🔗 Webhook</button>
+                <button class="btn btn-sync" id="syncBtn" onclick="triggerSync()">
+                    <span id="sync-icon">🔄</span> <span id="sync-text">Sync Now</span>
+                </button>
+                <button class="btn" onclick="exportCSV()">📥 Export CSV</button>
+                <a class="btn" href="/docs" target="_blank">📖 Swagger API</a>
+                <button class="btn" id="logoutBtn" onclick="doLogout()" style="display:none;">🔒 Logout</button>
+            </div>
+        </header>
+
+        <!-- Stats Section - Exactly matching PhonePe Business Portal -->
+        <!-- Stats Section - Exactly matching PhonePe Business Portal -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <!-- Card 1: Total Transaction Amount -->
+                <div class="stat-card">
+                    <div class="card-top-row">
+                        <div class="card-label-group">
+                            <span class="metric-icon-badge metric-icon-green">₹</span>
+                            <span class="card-title-text">Total Transaction Amount</span>
+                        </div>
+                        <span class="card-info-icon" title="Total received transaction volume">ⓘ</span>
+                    </div>
+                    <div class="card-metric-value">₹<span id="statTotalAmount">{{TOTAL_AMOUNT}}</span></div>
+                </div>
+
+                <!-- Card 2: Total Number of Transactions -->
+                <div class="stat-card">
+                    <div class="card-top-row">
+                        <div class="card-label-group">
+                            <span class="metric-icon-badge metric-icon-purple">≡</span>
+                            <span class="card-title-text">Total Number of Transactions</span>
+                        </div>
+                        <span class="card-info-icon" title="Total transactions recorded in system">ⓘ</span>
+                    </div>
+                    <div class="card-metric-value" id="statTotalCount">{{TOTAL_COUNT}}</div>
+                </div>
+
+                <!-- Card 3: Successful Transactions -->
+                <div class="stat-card">
+                    <div class="card-top-row">
+                        <div class="card-label-group">
+                            <span class="metric-icon-badge metric-icon-blue">✓</span>
+                            <span class="card-title-text">Successful Transactions</span>
+                        </div>
+                        <span class="card-info-icon" title="Completed successful transactions">ⓘ</span>
+                    </div>
+                    <div class="card-metric-value">
+                        <span id="statSuccessCount">{{SUCCESS_COUNT}}</span><span class="sub-denom">/<span
+                                id="statSuccessTotal">{{TOTAL_COUNT}}</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-footer-links"
+                style="display:flex; justify-content:flex-end; gap:8px; font-size:13px; color:#2563eb; margin-top:-14px; margin-bottom:20px;">
+                <a href="https://business.phonepe.com/dashboard/analytics" target="_blank"
+                    style="color:#2563eb; text-decoration:none; font-weight:500;">View Analytics <span
+                        style="font-size:11px;">↗</span></a>
+                <span style="color:#cbd5e1;">|</span>
+                <a href="#" onclick="window.print()" style="color:#475569; text-decoration:none; font-weight:500;">Print
+                    Summary 🖨️</a>
+            </div>
+        </section>
+
+        <!-- Search Toolbar -->
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput"
+                    placeholder="Search by Operator ID, ID, Customer, Status, Amount..." onkeyup="filterTable()">
+            </div>
+            <div class="count-badge">
+                Showing <span id="visibleCount">{{TOTAL_COUNT}}</span> of <span id="totalCount">{{TOTAL_COUNT}}</span>
+                transactions
+            </div>
+        </div>
+
+        <!-- Transactions Table (Showing: ID, Operator ID, Name, Amount, Payment Status, Date & Time) -->
+        <main class="table-card">
+            <div class="table-responsive">
+                <table id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;">#</th>
+                            <th>🆔 Transaction ID</th>
+                            <th class="highlight-col">📝 Operator ID</th>
+                            <th>👤 Customer / Name</th>
+                            <th>💰 Amount</th>
+                            <th>● Payment Status</th>
+                            <th>🕒 Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        {{ROWS_HTML}}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Non-intrusive Toast Notification -->
+    <div id="toast">Copied to clipboard!</div>
+
+    <script>
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if (!t) return;
+            t.innerText = msg;
+            t.classList.add('show');
+            clearTimeout(window.__toastTimeout);
+            window.__toastTimeout = setTimeout(() => t.classList.remove('show'), 2400);
+        }
+
+        function copyText(val) {
+            if (!val || val === '—') return;
+            navigator.clipboard.writeText(val);
+            showToast('Copied: ' + val);
+        }
+
+        function filterTable() {
+            const q = document.getElementById('searchInput').value.toLowerCase().trim();
+            const rows = document.querySelectorAll('#tableBody tr');
+            let visible = 0;
+            rows.forEach(r => {
+                const data = r.getAttribute('data-search') || '';
+                if (!q || data.includes(q)) {
+                    r.style.display = '';
+                    visible++;
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+            document.getElementById('visibleCount').innerText = visible;
+        }
+
+        async function triggerSync(isSilent = false) {
+            const btn = document.getElementById('sync-text');
+            const icon = document.getElementById('sync-icon');
+            if (!isSilent && btn && icon) {
+                btn.innerText = 'Syncing...';
+                icon.innerText = '⏳';
+                showToast('Syncing transactions from PhonePe...');
+            }
+
+            try {
+                const resp = await fetch('/api/v1/db/sync', { method: 'POST' });
+                const res = await resp.json();
+                if (res.success) {
+                    if (!isSilent) showToast('✅ Synced ' + (res.count || 0) + ' transactions!');
+                    if (typeof refreshTableData === 'function') {
+                        await refreshTableData();
+                    }
+                } else if (!isSilent) {
+                    showToast('Notice: ' + (res.message || res.error || 'Failed'));
+                }
+            } catch (e) {
+                if (!isSilent) showToast('Sync error: ' + e.toString());
+            } finally {
+                if (!isSilent && btn && icon) {
+                    btn.innerText = 'Sync from PhonePe';
+                    icon.innerText = '🔄';
+                }
+            }
+        }
+
+        function exportCSV() {
+            const table = document.getElementById('transactionsTable');
+            let csv = [];
+            for (let row of table.rows) {
+                let cols = [];
+                for (let cell of row.cells) {
+                    let text = cell.innerText.replace(/\s+/g, ' ').replace('📋', '').trim();
+                    cols.push('"' + text.replace(/"/g, '""') + '"');
+                }
+                csv.push(cols.join(','));
+            }
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'PhonePe_Transactions_' + new Date().toISOString().slice(0, 10) + '.csv';
+            a.click();
+            showToast('CSV Exported successfully!');
+        }
+
+
+        // Helper to update the Live Transaction Card
+        function updateLiveCard(txn) {
+            if (!txn) return;
+            const noteEl = document.getElementById('liveCardNote');
+            const nameEl = document.getElementById('liveCardName');
+            const linkEl = document.getElementById('liveCardTxnLink');
+            const amtEl = document.getElementById('liveCardAmount');
+            const cardEl = document.getElementById('liveHighlightCard');
+
+            const opId = txn.operator_id || txn.transaction_note || '—';
+            const cleanId = String(txn.transaction_id || '').trim();
+            const amt = Number(txn.amount || 0);
+
+            if (noteEl) noteEl.innerText = opId;
+            if (nameEl) nameEl.innerText = txn.name || 'Customer';
+            if (linkEl && cleanId) {
+                linkEl.innerText = cleanId;
+                linkEl.href = `https://business.phonepe.com/dashboard/transactions/details/${cleanId}`;
+            }
+            if (amtEl) amtEl.innerText = amt.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
+            if (cardEl) {
+                cardEl.style.transform = 'scale(1.02)';
+                cardEl.style.boxShadow = '0 0 20px rgba(168, 85, 247, 0.4)';
+                setTimeout(() => {
+                    cardEl.style.transform = 'scale(1)';
+                    cardEl.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.04)';
+                }, 1000);
+            }
+        }
+
+        // Prepend new live transaction quietly to the table (NO POPUPS & 100% STABLE DEDUPLICATION)
+        function prependLiveTransaction(txn) {
+            const tbody = document.getElementById('tableBody');
+            if (!tbody || !txn || !txn.transaction_id) return;
+
+            const cleanId = String(txn.transaction_id).trim();
+            const opIdText = txn.operator_id || txn.transaction_note || '';
+            const custName = txn.name || 'Customer';
+            const status = txn.status || 'PAYMENT_SUCCESS';
+            const statusClass = /SUCCESS|COMPLETED|PAID/i.test(status) ? 'status-success' : (/FAIL|ERROR|DECLINE/i.test(status) ? 'status-error' : 'status-pending');
+            const amountVal = parseFloat(txn.amount || 0);
+
+            const opIdHtml = (opIdText && opIdText !== '—')
+                ? `<div class="note-badge" title="Click to copy Operator ID" onclick="copyText('${opIdText}')">
+                     <span>${opIdText}</span>
+                     <button class="copy-btn">📋</button>
+                   </div>`
+                : '<span class="text-muted" style="font-style:italic; color:#94a3b8;">—</span>';
+
+            const existingRow = document.querySelector(`tr[data-txn-id="${cleanId}"]`) || document.getElementById(`txn-row-${cleanId}`);
+            if (existingRow) {
+                // Update existing row in place
+                if (existingRow.children.length >= 7) {
+                    if (opIdText) existingRow.children[2].innerHTML = opIdHtml;
+                    if (custName && custName !== 'Customer') existingRow.children[3].innerText = custName;
+                    if (amountVal > 0) existingRow.children[4].innerText = `₹ ${amountVal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+                    existingRow.children[5].innerHTML = `<span class="status-badge ${statusClass}">● ${status}</span>`;
+                }
+                existingRow.classList.add('row-new');
+                setTimeout(() => existingRow.classList.remove('row-new'), 3000);
+                showToast('⚡ Updated: ₹' + amountVal.toFixed(2) + (opIdText ? ' (' + opIdText + ')' : ''));
+                return;
+            }
+
+            const placeholder = tbody.querySelector('.empty-placeholder');
+            if (placeholder) placeholder.remove();
+
+            const tr = document.createElement('tr');
+            tr.className = 'row-new';
+            tr.id = `txn-row-${cleanId}`;
+            tr.setAttribute('data-txn-id', cleanId);
+            tr.setAttribute('data-search', `${cleanId} ${opIdText} ${custName} ${status} ${amountVal}`.toLowerCase());
+
+            const fDate = txn.transaction_date || 'Just now';
+
+            tr.innerHTML = `
+                <td style="color:#15803d; font-weight:bold; width:40px;">⚡</td>
+                <td>
+                    <a href="https://business.phonepe.com/dashboard/transactions/details/${cleanId}" target="_blank" class="id-badge" title="Open PhonePe Details">
+                        <span>${cleanId}</span>
+                        <button class="copy-btn" onclick="event.preventDefault(); copyText('${cleanId}')" title="Copy ID">📋</button>
+                    </a>
+                </td>
+                <td>${opIdHtml}</td>
+                <td style="font-weight:600; color:#1e293b;">${custName}</td>
+                <td class="amount-text" style="color:#15803d; font-weight:700;">₹ ${amountVal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+                <td><span class="status-badge ${statusClass}">● ${status}</span></td>
+                <td style="font-size:13px; color:#475569;">${fDate}</td>
+            `;
+
+            tbody.prepend(tr);
+
+            // Update stats cards safely and accurately
+            try {
+                const countEl = document.getElementById('statTotalCount');
+                const totalEl = document.getElementById('totalCount');
+                const visEl = document.getElementById('visibleCount');
+                const amtEl = document.getElementById('statTotalAmount');
+                const sTot = document.getElementById('statSuccessTotal');
+                const sCount = document.getElementById('statSuccessCount');
+
+                const currentCount = tbody.querySelectorAll('tr:not(.empty-placeholder)').length;
+                if (countEl) countEl.innerText = currentCount;
+                if (totalEl) totalEl.innerText = currentCount;
+                if (visEl) visEl.innerText = currentCount;
+                if (sTot) sTot.innerText = currentCount;
+                if (sCount) {
+                    const currentSucc = parseInt(sCount.innerText || 0) + 1;
+                    sCount.innerText = currentSucc;
+                }
+
+                if (amtEl) {
+                    const rawAmt = parseFloat(amtEl.innerText.replace(/[^\d.]/g, '') || 0);
+                    const newAmt = rawAmt + amountVal;
+                    amtEl.innerText = newAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                }
+            } catch (err) { }
+
+            showToast('⚡ Live payment received: ₹' + amountVal.toFixed(2) + (noteText ? ' (' + noteText + ')' : ''));
+            playSuccessChime();
+        }
+
+        // Web Audio API Ding / Cash Sound (zero dependencies, works in all browsers)
+        function playSuccessChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = ctx.currentTime;
+                
+                const osc1 = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(587.33, now); // D5
+                osc1.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(880, now + 0.1);
+                osc2.frequency.exponentialRampToValueAtTime(1760, now + 0.35); // A6
+
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc1.start(now);
+                osc2.start(now + 0.08);
+                osc1.stop(now + 0.6);
+                osc2.stop(now + 0.6);
+            } catch (e) {}
+        }
+
+        const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+            ? window.location.origin
+            : 'http://127.0.0.1:8000';
+
+        // Live EventSource Stream for instant table updates
+        function connectLiveStream() {
+            try {
+                const sseUrl = `${API_BASE}/api/v1/live/stream`;
+                const sse = new EventSource(sseUrl);
+                sse.onopen = function () {
+                    console.log('⚡ [Live SSE] Connected to backend live stream at', sseUrl);
+                };
+                sse.onmessage = function (e) {
+                    try {
+                        const data = JSON.parse(e.data);
+                        console.log('⚡ [Live SSE] Message received:', data);
+                        if (data && data.event === 'REFRESH_TABLE') {
+                            refreshTableData();
+                            showToast('🔄 Synced from PhonePe to Database!');
+                        } else if (data && (data.event === 'NEW_TRANSACTION' || data.transaction_id)) {
+                            prependLiveTransaction(data);
+                        }
+                    } catch (err) { }
+                };
+                sse.onerror = function () {
+                    console.warn('SSE disconnected, reconnecting in 3s...');
+                    sse.close();
+                    setTimeout(connectLiveStream, 3000);
+                };
+            } catch (e) { }
+        }
+
+        // Stable asynchronous hydration (no page reloads)
+        async function refreshTableData() {
+            try {
+                const resp = await fetch(`${API_BASE}/api/v1/db/transactions?limit=500`);
+                if (!resp.ok) return;
+                const json = await resp.json();
+                if (!json || !json.data || !json.data.length) return;
+
+                const tbody = document.getElementById('tableBody');
+                if (!tbody) return;
+
+                let html = '';
+                let totalAmt = 0;
+                let successCount = 0;
+
+                json.data.forEach((t, idx) => {
+                    const cleanId = String(t.transaction_id || 'N/A').trim();
+                    const opId = t.operator_id || t.transaction_note || '';
+                    const amt = parseFloat(t.amount || 0);
+                    totalAmt += amt;
+                    const name = t.name || 'Customer';
+                    const status = t.status || 'COMPLETED';
+                    if (/SUCCESS|COMPLETED|PAID/i.test(status)) successCount++;
+                    const dateRaw = String(t.transaction_date || '');
+                    let fDate = dateRaw;
+                    if (dateRaw.length >= 12 && /^\d+$/.test(dateRaw)) {
+                        try {
+                            fDate = new Date(parseInt(dateRaw, 10)).toLocaleString();
+                        } catch (e) { }
+                    }
+
+                    const opIdHtml = (opId && opId !== '—')
+                        ? `<div class="note-badge" title="Click to copy Operator ID" onclick="copyText('${opId}')">
+                             <span>${opId}</span>
+                             <button class="copy-btn">📋</button>
+                           </div>`
+                        : '<span class="text-muted" style="font-style:italic; color:#94a3b8;">—</span>';
+
+                    const statusClass = /SUCCESS|COMPLETED|PAID/i.test(status) ? 'status-success' : (/FAIL|ERROR|DECLINE/i.test(status) ? 'status-error' : 'status-pending');
+
+                    html += `
+                    <tr id="txn-row-${cleanId}" data-txn-id="${cleanId}" data-search="${cleanId.toLowerCase()} ${String(opId).toLowerCase()} ${String(name).toLowerCase()} ${status.toLowerCase()} ${amt}">
+                        <td style="font-weight:600; color:#64748b; width:40px;">${idx + 1}</td>
+                        <td>
+                            <a href="https://business.phonepe.com/dashboard/transactions/details/${cleanId}" target="_blank" class="id-badge" title="Open PhonePe Details Link">
+                                <span>${cleanId}</span>
+                                <button class="copy-btn" onclick="event.preventDefault(); copyText('${cleanId}')" title="Copy ID">📋</button>
+                            </a>
+                        </td>
+                        <td>${opIdHtml}</td>
+                        <td style="font-weight:600; color:#1e293b;">${name}</td>
+                        <td class="amount-text" style="color:#0f172a; font-weight:700;">₹ ${amt.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+                        <td><span class="status-badge ${statusClass}">● ${status}</span></td>
+                        <td style="font-size:13px; color:#475569;">${fDate}</td>
+                    </tr>
+                    `;
+                });
+
+                tbody.innerHTML = html;
+                const count = json.data.length;
+                const cEl = document.getElementById('statTotalCount');
+                if (cEl) cEl.innerText = count;
+                const tEl = document.getElementById('totalCount');
+                if (tEl) tEl.innerText = count;
+                const vEl = document.getElementById('visibleCount');
+                if (vEl) vEl.innerText = count;
+
+                const amtEl = document.getElementById('statTotalAmount');
+                if (amtEl) amtEl.innerText = totalAmt.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+                const sCount = document.getElementById('statSuccessCount');
+                if (sCount) sCount.innerText = successCount;
+                const sTot = document.getElementById('statSuccessTotal');
+                if (sTot) sTot.innerText = count;
+            } catch (e) {
+                console.error('Table refresh error:', e);
+            }
+        }
+
+        // Authentication state handling
+        async function checkAuthStatus() {
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/auth/status`, { credentials: 'include' });
+                const data = await res.json();
+                const loginModal = document.getElementById('loginModal');
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (data && data.authenticated) {
+                    if (loginModal) loginModal.classList.remove('active');
+                    if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+                } else {
+                    if (loginModal) loginModal.classList.add('active');
+                    if (logoutBtn) logoutBtn.style.display = 'none';
+                    const pwdInput = document.getElementById('loginPasswordInput');
+                    if (pwdInput) setTimeout(() => pwdInput.focus(), 200);
+                }
+            } catch(e) {}
+        }
+
+        async function doLogin() {
+            const pwdInput = document.getElementById('loginPasswordInput');
+            const errMsg = document.getElementById('loginErrorMsg');
+            if (!pwdInput) return;
+            const password = pwdInput.value.trim();
+            if (!password) return;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ password: password })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    if (errMsg) errMsg.style.display = 'none';
+                    const loginModal = document.getElementById('loginModal');
+                    if (loginModal) loginModal.classList.remove('active');
+                    const logoutBtn = document.getElementById('logoutBtn');
+                    if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+                    showToast('✅ Web Book Unlocked Successfully');
+                    refreshTableData();
+                } else {
+                    if (errMsg) errMsg.style.display = 'block';
+                }
+            } catch(e) {
+                if (errMsg) {
+                    errMsg.innerText = '⚠️ Network error communicating with server';
+                    errMsg.style.display = 'block';
+                }
+            }
+        }
+
+        async function doLogout() {
+            try {
+                await fetch(`${API_BASE}/api/v1/auth/logout`, { method: 'POST', credentials: 'include' });
+            } catch(e) {}
+            window.location.reload();
+        }
+
+        // Webhook configuration modal
+        async function openWebhookModal() {
+            const modal = document.getElementById('webhookModal');
+            const input = document.getElementById('webhookUrlInput');
+            const msg = document.getElementById('webhookStatusMsg');
+            if (msg) msg.innerText = '';
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/webhook/config`, { credentials: 'include' });
+                const data = await res.json();
+                if (input && data.webhook_url) input.value = data.webhook_url;
+            } catch(e) {}
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeWebhookModal() {
+            const modal = document.getElementById('webhookModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        async function saveWebhook() {
+            const input = document.getElementById('webhookUrlInput');
+            const msg = document.getElementById('webhookStatusMsg');
+            const url = (input ? input.value : '').trim();
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/webhook/config`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ webhook_url: url })
+                });
+                const data = await res.json();
+                if (msg) {
+                    msg.style.color = '#15803d';
+                    msg.innerText = '✅ ' + (data.message || 'Webhook URL saved successfully!');
+                }
+                showToast('🔗 Webhook URL Saved');
+                setTimeout(closeWebhookModal, 1200);
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '⚠️ Failed to save Webhook URL';
+                }
+            }
+        }
+
+        async function testWebhook() {
+            const msg = document.getElementById('webhookStatusMsg');
+            if (msg) {
+                msg.style.color = '#475569';
+                msg.innerText = '⏳ Dispatching test webhook ping...';
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/webhook/test`, { method: 'POST', credentials: 'include' });
+                const data = await res.json();
+                if (msg) {
+                    msg.style.color = data.success ? '#15803d' : '#dc2626';
+                    msg.innerText = (data.success ? '✅ ' : '⚠️ ') + (data.message || 'Done');
+                }
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '⚠️ Test ping failed: ' + e.message;
+                }
+            }
+        }
+
+        // ==========================================
+        // PhonePe Business Login Modal Logic
+        // ==========================================
+        async function openPhonePeLoginModal() {
+            const modal = document.getElementById('phonepeLoginModal');
+            if (modal) modal.classList.add('active');
+            checkPhonePeStatus();
+            refreshLiveScreenPreview();
+        }
+
+        function closePhonePeLoginModal() {
+            const modal = document.getElementById('phonepeLoginModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        async function checkPhonePeStatus() {
+            const badge = document.getElementById('phonepeAuthStatusBadge');
+            if (badge) badge.innerText = 'Checking session status...';
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/status`);
+                const data = await res.json();
+                if (data.logged_in) {
+                    if (badge) {
+                        badge.style.background = '#dcfce7';
+                        badge.style.color = '#15803d';
+                        badge.innerText = '🟢 Active Session (Logged In)';
+                    }
+                } else {
+                    if (badge) {
+                        badge.style.background = '#fee2e2';
+                        badge.style.color = '#b91c1c';
+                        badge.innerText = '🔴 Logged Out (Authentication Required)';
+                    }
+                }
+            } catch(e) {
+                if (badge) badge.innerText = '⚠️ Error checking status';
+            }
+        }
+
+        async function sendPhonePeOtp() {
+            const phoneInput = document.getElementById('phonepeMobileInput');
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            const btn = document.getElementById('sendOtpBtn');
+            const phone = (phoneInput ? phoneInput.value : '').replace(/\D/g, '');
+
+            if (!phone || phone.length !== 10) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Please enter a valid 10-digit mobile number.';
+                }
+                return;
+            }
+
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = '⏳ Requesting OTP...';
+            }
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = 'Navigating to PhonePe and requesting OTP...';
+            }
+
+            // Live preview updates as PhonePe loads and clicks
+            setTimeout(refreshLiveScreenPreview, 1500);
+            setTimeout(refreshLiveScreenPreview, 3500);
+            setTimeout(refreshLiveScreenPreview, 6500);
+
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: phone })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    if (data.status === 'ALREADY_LOGGED_IN' || data.status === 'LOGGED_IN') {
+                        if (msg) {
+                            msg.style.color = '#15803d';
+                            msg.innerText = '✅ ' + data.message;
+                        }
+                        showToast('🎉 Already Logged In!');
+                        checkPhonePeStatus();
+                    } else {
+                        if (msg) {
+                            msg.style.color = '#15803d';
+                            msg.innerText = '📲 ' + data.message;
+                        }
+                        const otpStep = document.getElementById('loginStepOtp');
+                        if (otpStep) otpStep.style.display = 'block';
+                        showToast('📲 OTP Sent to ' + phone);
+                    }
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '❌ ' + (data.detail || data.message || 'Failed to send OTP.');
+                    }
+                }
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Network error: ' + e.toString();
+                }
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerText = '📲 Send OTP';
+                }
+            }
+        }
+
+        async function triggerClickContinue() {
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            const btn = document.getElementById('clickContinueBtn');
+            if (btn) btn.disabled = true;
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '🎯 Clicking CONTINUE on PhonePe screen...';
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/click-continue`, { method: 'POST' });
+                const data = await res.json();
+                refreshLiveScreenPreview();
+                if (msg) {
+                    msg.style.color = '#15803d';
+                    msg.innerText = '✅ Clicked CONTINUE! Screen refreshing...';
+                }
+                const otpStep = document.getElementById('loginStepOtp');
+                if (otpStep) otpStep.style.display = 'block';
+                setTimeout(refreshLiveScreenPreview, 1200);
+                setTimeout(refreshLiveScreenPreview, 3000);
+            } catch (e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Click error: ' + e.toString();
+                }
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function verifyPhonePeOtp() {
+            const otpInput = document.getElementById('phonepeOtpInput');
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            const btn = document.getElementById('verifyOtpBtn');
+            const otp = (otpInput ? otpInput.value : '').replace(/\D/g, '');
+
+            if (!otp || otp.length < 4) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Please enter the full OTP code.';
+                }
+                return;
+            }
+
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = '⏳ Verifying OTP & Logging In...';
+            }
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = 'Submitting OTP to PhonePe and awaiting dashboard...';
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/verify-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ otp: otp })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    if (msg) {
+                        msg.style.color = '#15803d';
+                        msg.innerText = '🎉 ' + (data.message || 'Logged in successfully!');
+                    }
+                    showToast('🎉 PhonePe Login Successful!');
+                    checkPhonePeStatus();
+                    setTimeout(closePhonePeLoginModal, 1500);
+                    refreshTableData();
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '❌ ' + (data.detail || data.message || 'OTP verification failed.');
+                    }
+                }
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Error: ' + e.toString();
+                }
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerText = '✅ Verify OTP & Log In';
+                }
+            }
+        }
+
+        async function forceClickContinue() {
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '👉 Clicking CONTINUE on PhonePe page...';
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/click-continue`, { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    if (msg) {
+                        msg.style.color = '#15803d';
+                        msg.innerText = '✅ Clicked CONTINUE! Loading OTP step...';
+                    }
+                    const otpStep = document.getElementById('loginStepOtp');
+                    if (otpStep) otpStep.style.display = 'block';
+                    refreshLiveScreenPreview();
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '⚠️ ' + (data.message || 'Could not click Continue.');
+                    }
+                }
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Error: ' + e.toString();
+                }
+            }
+        }
+
+        async function exportActiveSession() {
+            try {
+                window.location.href = `${API_BASE}/api/v1/session/export`;
+                showToast('📤 Downloading active PhonePe session...');
+            } catch (e) {
+                alert('Export failed: ' + e);
+            }
+        }
+
+        function triggerSessionFileInput() {
+            const input = document.getElementById('sessionFileInput');
+            if (input) input.click();
+        }
+
+        async function handleSessionFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '📥 Importing session file and activating dashboard...';
+            }
+
+            try {
+                const text = await file.text();
+                const sessionJson = JSON.parse(text);
+
+                const res = await fetch(`${API_BASE}/api/v1/session/import`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(sessionJson)
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    if (msg) {
+                        msg.style.color = '#15803d';
+                        msg.innerText = '🎉 ' + (data.message || 'Session imported successfully!');
+                    }
+                    showToast('🎉 Session imported! PhonePe is now active.');
+                    checkPhonePeStatus();
+                    refreshLiveScreenPreview();
+                    setTimeout(checkPhonePeStatus, 2000);
+                    setTimeout(refreshLiveScreenPreview, 3000);
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '❌ ' + (data.message || data.detail || 'Failed to import session.');
+                    }
+                }
+            } catch (err) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Invalid session file: ' + err.toString();
+                }
+            } finally {
+                event.target.value = '';
+            }
+        }
+
+
+        function refreshLiveScreenPreview() {
+            const img = document.getElementById('phonepeLiveScreenPreview');
+            if (img) {
+                img.src = `${API_BASE}/api/v1/debug/screenshot?t=` + new Date().getTime();
+                img.style.display = 'block';
+            }
+        }
+
+        function toggleLiveScreenPreview() {
+            const img = document.getElementById('phonepeLiveScreenPreview');
+            if (!img) return;
+            if (img.style.display === 'none' || !img.style.display) {
+                refreshLiveScreenPreview();
+            } else {
+                img.style.display = 'none';
+            }
+        }
+
+        function initDashboard() {
+            checkAuthStatus();
+            refreshTableData();
+            connectLiveStream();
+            // Automatically poll MySQL every 8 seconds so any DB changes appear instantly
+            setInterval(refreshTableData, 8000);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDashboard);
+        } else {
+            initDashboard();
+        }
+    </script>
+</body>
+
+</html>

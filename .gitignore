@@ -1,3 +1,6 @@
-phonepe_browser_session/
-venv/
-__pycache__/
+**/phonepe_browser_session/
+**/session_state.json
+**/scratch/
+**/venv/
+**/__pycache__/
+
