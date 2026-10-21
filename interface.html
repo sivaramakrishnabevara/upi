@@ -691,8 +691,15 @@
 
             <div id="phonepeLoginStatusMsg" style="font-size:12.5px; margin-top:8px; min-height:18px;"></div>
 
+            <!-- In-Modal Live Screen Preview -->
+            <div style="margin-top:10px;">
+                <img id="phonepeLiveScreenPreview" src="/api/v1/debug/screenshot" style="width:100%; max-height:220px; object-fit:contain; border-radius:8px; border:1px solid #e2e8f0; display:none; background:#f8fafc;" alt="PhonePe Live Screen">
+            </div>
+
             <div class="modal-actions" style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap;">
-                <a href="/api/v1/debug/screenshot" target="_blank" class="btn-modal-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">📸 View Live Screen</a>
+                <button class="btn-modal-secondary" onclick="forceClickContinue()" style="color:#2563eb; font-weight:700; border-color:#93c5fd; background:#eff6ff;">👉 Click Continue</button>
+                <button class="btn-modal-secondary" onclick="toggleLiveScreenPreview()">👁️ Preview Screen</button>
+                <a href="/api/v1/debug/screenshot" target="_blank" class="btn-modal-secondary" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">📸 Open Full Screen</a>
                 <button class="btn-modal-secondary" onclick="closePhonePeLoginModal()">Close</button>
                 <button class="btn-modal-secondary" onclick="checkPhonePeStatus()">🔄 Refresh Status</button>
             </div>
@@ -1451,6 +1458,55 @@
                     btn.disabled = false;
                     btn.innerText = '✅ Verify OTP & Log In';
                 }
+            }
+        }
+
+        async function forceClickContinue() {
+            const msg = document.getElementById('phonepeLoginStatusMsg');
+            if (msg) {
+                msg.style.color = '#2563eb';
+                msg.innerText = '👉 Clicking CONTINUE on PhonePe page...';
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/phonepe/auth/click-continue`, { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    if (msg) {
+                        msg.style.color = '#15803d';
+                        msg.innerText = '✅ Clicked CONTINUE! Loading OTP step...';
+                    }
+                    const otpStep = document.getElementById('loginStepOtp');
+                    if (otpStep) otpStep.style.display = 'block';
+                    refreshLiveScreenPreview();
+                } else {
+                    if (msg) {
+                        msg.style.color = '#dc2626';
+                        msg.innerText = '⚠️ ' + (data.message || 'Could not click Continue.');
+                    }
+                }
+            } catch(e) {
+                if (msg) {
+                    msg.style.color = '#dc2626';
+                    msg.innerText = '❌ Error: ' + e.toString();
+                }
+            }
+        }
+
+        function refreshLiveScreenPreview() {
+            const img = document.getElementById('phonepeLiveScreenPreview');
+            if (img) {
+                img.src = `${API_BASE}/api/v1/debug/screenshot?t=` + new Date().getTime();
+                img.style.display = 'block';
+            }
+        }
+
+        function toggleLiveScreenPreview() {
+            const img = document.getElementById('phonepeLiveScreenPreview');
+            if (!img) return;
+            if (img.style.display === 'none' || !img.style.display) {
+                refreshLiveScreenPreview();
+            } else {
+                img.style.display = 'none';
             }
         }
 

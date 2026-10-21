@@ -2375,42 +2375,50 @@ async def phonepe_auth_send_otp(request: Request):
             }""")
             print(f"🔍 [PhonePe Auth Button Info]: {btn_info}")
 
-            # 4. Click CONTINUE button
-            submit_btn = None
-            btn_selectors = [
-                "button[type='submit']",
-                "button:has-text('CONTINUE')",
-                "button:has-text('Continue')",
-                "button:has-text('PROCEED')",
-                "button:has-text('Next')",
-            ]
-            for b_sel in btn_selectors:
+            # 4. Click CONTINUE button using robust multi-strategy
+            await click_continue_on_page(page)
+
+            # 5. Wait & Poll to inspect response (up to 8 seconds)
+            errors_on_page = ""
+            has_captcha = False
+            for poll_idx in range(8):
+                await asyncio.sleep(1.0)
+
+                # Check if logged in
+                if "/dashboard" in page.url or "/transactions" in page.url:
+                    return {
+                        "success": True,
+                        "status": "LOGGED_IN",
+                        "message": "PhonePe Business logged in successfully!",
+                        "current_url": page.url,
+                        "phone": clean_phone,
+                    }
+
+                # Check if captcha appeared
                 try:
-                    b_el = await page.query_selector(b_sel)
-                    if b_el and await b_el.is_visible():
-                        submit_btn = b_el
+                    captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge'], div[class*='captcha' i]")
+                    if captcha_el and await captcha_el.is_visible():
+                        has_captcha = True
                         break
                 except Exception:
-                    continue
+                    pass
 
-            if submit_btn:
-                try:
-                    await submit_btn.click(timeout=5000)
-                except Exception:
-                    await page.evaluate("""() => {
-                        const btn = document.querySelector("button[type='submit']") || Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE'));
-                        if (btn) {
-                            btn.removeAttribute('disabled');
-                            btn.click();
-                        }
-                    }""")
-                print(f"✅ [PhonePe Auth] Clicked CONTINUE for mobile {clean_phone}.")
-            else:
-                await page.keyboard.press("Enter")
-                print(f"✅ [PhonePe Auth] Pressed Enter for mobile {clean_phone}.")
+                # Check if OTP input appeared
+                otp_boxes = await page.query_selector_all("input[maxlength='1'], input[autocomplete*='one-time-code' i], input[placeholder*='otp' i]")
+                if otp_boxes:
+                    print(f"🎉 [PhonePe Auth] Detected OTP input fields on page after {poll_idx+1}s!")
+                    return {
+                        "success": True,
+                        "status": "OTP_SENT",
+                        "message": f"OTP requested successfully for mobile {clean_phone}!",
+                        "phone": clean_phone,
+                        "current_url": page.url,
+                    }
 
-            # 5. Wait to inspect response
-            await asyncio.sleep(4)
+                # If still on login page at 4 seconds, trigger click again just in case
+                if poll_idx == 3:
+                    print("🔄 [PhonePe Auth] Re-triggering CONTINUE click to ensure transition...")
+                    await click_continue_on_page(page)
 
             errors_on_page = await page.evaluate("""() => {
                 const errElements = Array.from(document.querySelectorAll('[class*="error" i], [class*="alert" i], [role="alert"], [class*="warning" i], [class*="explain" i]'));
@@ -2418,31 +2426,6 @@ async def phonepe_auth_send_otp(request: Request):
             }""")
             if errors_on_page:
                 print(f"⚠️ [PhonePe Page Alert/Error]: {errors_on_page}")
-
-            page_text = ""
-            try:
-                page_text = await page.evaluate("() => document.body.innerText")
-                print(f"📄 [PhonePe Auth Page Text]:\n{page_text[:400]}")
-            except Exception:
-                pass
-
-            # Check if captcha iframe appeared
-            has_captcha = False
-            try:
-                captcha_el = await page.query_selector("iframe[src*='captcha'], iframe[src*='hcaptcha'], iframe[src*='challenge'], div[class*='captcha' i]")
-                if captcha_el and await captcha_el.is_visible():
-                    has_captcha = True
-            except Exception:
-                pass
-
-            if "/dashboard" in page.url or "/transactions" in page.url:
-                return {
-                    "success": True,
-                    "status": "LOGGED_IN",
-                    "message": "PhonePe Business logged in successfully!",
-                    "current_url": page.url,
-                    "phone": clean_phone,
-                }
 
             if errors_on_page and not has_captcha:
                 return {
@@ -2473,6 +2456,121 @@ async def phonepe_auth_send_otp(request: Request):
         except Exception as e:
             print(f"❌ [PhonePe Auth] Error during send-otp: {e}")
             raise HTTPException(status_code=500, detail=str(e))
+
+
+async def click_continue_on_page(page) -> dict:
+    """
+    Robust multi-strategy click on PhonePe's CONTINUE / PROCEED button.
+    1. Finds any element with text 'CONTINUE' or 'PROCEED'
+    2. Calculates its exact screen coordinates
+    3. Issues real OS-level mouse click via page.mouse.click (100% trusted event)
+    4. Issues Playwright locator force click
+    5. Dispatches pointerdown, mousedown, pointerup, mouseup, click, and form submit
+    6. Presses Enter on keyboard
+    """
+    info = await page.evaluate("""() => {
+        const all = Array.from(document.querySelectorAll('*'));
+        let target = null;
+        for (const el of all) {
+            const txt = (el.innerText || el.value || '').trim().toUpperCase();
+            if (txt === 'CONTINUE' || txt === 'PROCEED' || (txt.startsWith('CONTINUE') && txt.length < 15)) {
+                const rect = el.getBoundingClientRect();
+                const style = window.getComputedStyle(el);
+                if (rect.width > 30 && rect.height > 15 && style.visibility !== 'hidden' && style.display !== 'none') {
+                    if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.tagName === 'INPUT') {
+                        target = el;
+                        break;
+                    }
+                    if (!target) target = el;
+                }
+            }
+        }
+        if (!target) {
+            target = document.querySelector("button[type='submit']") || 
+                     Array.from(document.querySelectorAll("button")).find(b => (b.innerText || '').toUpperCase().includes('CONTINUE'));
+        }
+        if (!target) return { found: false };
+        const rect = target.getBoundingClientRect();
+        return {
+            found: true,
+            tagName: target.tagName,
+            text: (target.innerText || target.value || '').trim(),
+            disabled: !!target.disabled || target.getAttribute('aria-disabled') === 'true',
+            x: Math.round(rect.left + rect.width / 2),
+            y: Math.round(rect.top + rect.height / 2),
+            width: Math.round(rect.width),
+            height: Math.round(rect.height),
+        };
+    }""")
+    print(f"🔍 [PhonePe Continue Button Info]: {info}")
+
+    if not info.get("found"):
+        await page.keyboard.press("Enter")
+        return {"clicked": False, "method": "enter_fallback", "info": info}
+
+    bx = info["x"]
+    by = info["y"]
+
+    # Method 1: Real CDP mouse click at exact center coordinates (100% trusted event)
+    try:
+        await page.mouse.move(bx, by)
+        await asyncio.sleep(0.08)
+        await page.mouse.down()
+        await asyncio.sleep(0.05)
+        await page.mouse.up()
+        print(f"🎯 [PhonePe Auth] Executed real CDP mouse click at ({bx}, {by}).")
+    except Exception as me:
+        print(f"⚠️ CDP mouse click failed: {me}")
+
+    # Method 2: Playwright locator click with force=True
+    try:
+        loc = page.locator("button:has-text('CONTINUE'), button:has-text('Continue'), [role='button']:has-text('CONTINUE'), text=CONTINUE").first
+        if await loc.count() > 0:
+            await loc.click(force=True, timeout=2000)
+            print("🎯 [PhonePe Auth] Executed locator force-click on CONTINUE.")
+    except Exception as le:
+        print(f"⚠️ Locator click warning: {le}")
+
+    # Method 3: Native DOM event dispatch & form submit
+    await page.evaluate("""(coords) => {
+        const el = document.elementFromPoint(coords.x, coords.y) || 
+                   Array.from(document.querySelectorAll('button, [role="button"], div, span')).find(b => {
+                       const t = (b.innerText || '').trim().toUpperCase();
+                       return t === 'CONTINUE' || t === 'PROCEED';
+                   });
+        if (el) {
+            const btn = el.closest('button') || el.closest('[role="button"]') || el;
+            ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'].forEach(evt => {
+                btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+            });
+            if (btn.form) {
+                try { btn.form.requestSubmit(); } catch(e) {}
+            }
+        }
+    }""", {"x": bx, "y": by})
+
+    # Method 4: Keyboard Enter
+    try:
+        await page.keyboard.press("Enter")
+    except Exception:
+        pass
+
+    return {"clicked": True, "method": "multi_strategy", "info": info}
+
+
+@app.post("/api/v1/phonepe/auth/click-continue")
+async def phonepe_auth_click_continue():
+    """Directly triggers clicking CONTINUE on the PhonePe login screen."""
+    async with browser_lock:
+        page = await get_active_page()
+        res = await click_continue_on_page(page)
+        await asyncio.sleep(2)
+        return {
+            "success": True,
+            "result": res,
+            "current_url": page.url,
+            "message": "Clicked CONTINUE button on PhonePe page."
+        }
 
 
 @app.get("/api/v1/debug/screenshot")
