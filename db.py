@@ -37,8 +37,22 @@ DB_CONFIG = {
 
 
 def get_connection():
-    """Returns a pymysql connection to the 'phone' database."""
-    return pymysql.connect(**DB_CONFIG)
+    """Returns a pymysql connection to the 'phone' database (auto-creating DB if missing)."""
+    try:
+        return pymysql.connect(**DB_CONFIG)
+    except pymysql.err.OperationalError as e:
+        # If database does not exist (error 1049), connect without database and create it
+        if e.args and e.args[0] == 1049:
+            cfg = DB_CONFIG.copy()
+            target_db = cfg.pop("database", "phone")
+            c = pymysql.connect(**cfg)
+            try:
+                with c.cursor() as cur:
+                    cur.execute(f"CREATE DATABASE IF NOT EXISTS `{target_db}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+            finally:
+                c.close()
+            return pymysql.connect(**DB_CONFIG)
+        raise
 
 
 def init_db():
@@ -191,58 +205,69 @@ def save_multiple_transactions(txn_list: list) -> int:
 
 def get_all_transactions(limit: int = 200):
     """Retrieves all transactions from MySQL (default limit: 200)."""
-    conn = get_connection()
     try:
-        with conn.cursor(pymysql.cursors.DictCursor) as cur:
-            cur.execute(
-                "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date, created_at FROM transactions ORDER BY id DESC LIMIT %s",
-                (limit,),
-            )
-            rows = cur.fetchall()
-            for r in rows:
-                # Backward-compatibility alias: transaction_note points to operator_id
-                r["transaction_note"] = r.get("operator_id")
-            return rows
-    finally:
-        conn.close()
+        conn = get_connection()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                cur.execute(
+                    "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date, created_at FROM transactions ORDER BY id DESC LIMIT %s",
+                    (limit,),
+                )
+                rows = cur.fetchall()
+                for r in rows:
+                    r["transaction_note"] = r.get("operator_id")
+                return rows
+        finally:
+            conn.close()
+    except Exception as e:
+        print(f"⚠️ Error fetching transactions from DB: {e}")
+        return []
 
 
 def find_transaction_by_id(txn_id: str):
     """Finds a transaction in MySQL by transaction ID."""
     if not txn_id:
         return None
-    conn = get_connection()
     try:
-        with conn.cursor(pymysql.cursors.DictCursor) as cur:
-            cur.execute(
-                "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date FROM transactions WHERE transaction_id = %s LIMIT 1",
-                (txn_id,),
-            )
-            row = cur.fetchone()
-            if row:
-                row["transaction_note"] = row.get("operator_id")
-            return row
-    finally:
-        conn.close()
+        conn = get_connection()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                cur.execute(
+                    "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date FROM transactions WHERE transaction_id = %s LIMIT 1",
+                    (txn_id,),
+                )
+                row = cur.fetchone()
+                if row:
+                    row["transaction_note"] = row.get("operator_id")
+                return row
+        finally:
+            conn.close()
+    except Exception as e:
+        print(f"⚠️ Error finding transaction by id: {e}")
+        return None
 
 
 def find_transaction_by_operator_id(op_id: str):
     """Finds a transaction in MySQL by operator_id or transaction ID."""
     if not op_id:
         return None
-    conn = get_connection()
     try:
-        with conn.cursor(pymysql.cursors.DictCursor) as cur:
-            cur.execute(
-                "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date FROM transactions WHERE operator_id = %s OR transaction_id = %s LIMIT 1",
-                (op_id, op_id),
-            )
-            row = cur.fetchone()
-            if row:
-                row["transaction_note"] = row.get("operator_id")
-            return row
-    finally:
-        conn.close()
+        conn = get_connection()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                cur.execute(
+                    "SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date FROM transactions WHERE operator_id = %s OR transaction_id = %s LIMIT 1",
+                    (op_id, op_id),
+                )
+                row = cur.fetchone()
+                if row:
+                    row["transaction_note"] = row.get("operator_id")
+                return row
+        finally:
+            conn.close()
+    except Exception as e:
+        print(f"⚠️ Error finding transaction by operator id: {e}")
+        return None
 
 
 # Backward compatible function alias
@@ -253,24 +278,28 @@ def find_transaction(query_str: str):
     """Finds a transaction in MySQL by matching transaction_id, operator_id, or customer name."""
     if not query_str:
         return None
-    conn = get_connection()
     try:
-        with conn.cursor(pymysql.cursors.DictCursor) as cur:
-            cur.execute(
-                """
-                SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date 
-                FROM transactions 
-                WHERE transaction_id = %s OR operator_id = %s OR name LIKE %s
-                LIMIT 1
-                """,
-                (query_str, query_str, f"%{query_str}%"),
-            )
-            row = cur.fetchone()
-            if row:
-                row["transaction_note"] = row.get("operator_id")
-            return row
-    finally:
-        conn.close()
+        conn = get_connection()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                cur.execute(
+                    """
+                    SELECT id, transaction_id, operator_id, name, amount, merchant_id, status, transaction_date 
+                    FROM transactions 
+                    WHERE transaction_id = %s OR operator_id = %s OR name LIKE %s
+                    LIMIT 1
+                    """,
+                    (query_str, query_str, f"%{query_str}%"),
+                )
+                row = cur.fetchone()
+                if row:
+                    row["transaction_note"] = row.get("operator_id")
+                return row
+        finally:
+            conn.close()
+    except Exception as e:
+        print(f"⚠️ Error finding transaction: {e}")
+        return None
 
 
 def get_max_transaction_id() -> int:

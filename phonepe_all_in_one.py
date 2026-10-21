@@ -1518,6 +1518,13 @@ async def lifespan(app: FastAPI):
     live_monitor_task = None
     db_watcher_task = None
 
+    if db:
+        try:
+            db.init_db()
+            print("🗄️ MySQL Database connected and initialized.")
+        except Exception as e:
+            print(f"⚠️ MySQL Database initialization notice: {e}")
+
     playwright_instance = await async_playwright().start()
     try:
         browser_context = await get_stealth_browser_context(playwright_instance, headless=is_headless_default())
@@ -2138,8 +2145,17 @@ async def view_transactions_table():
     """Serves the interactive web table dashboard loaded from interface.html with full MySQL transactions."""
     rows = []
     if db:
-        rows = db.get_all_transactions(limit=500)
-    return HTMLResponse(content=render_interface_html(rows))
+        try:
+            rows = db.get_all_transactions(limit=500)
+        except Exception as e:
+            print(f"⚠️ Could not fetch transactions from database: {e}")
+            rows = []
+    try:
+        content = render_interface_html(rows)
+    except Exception as e:
+        print(f"⚠️ Error rendering interface.html: {e}")
+        content = f"<html><body style='font-family:sans-serif;padding:40px;background:#f8fafc;'><h2>PhonePe Dashboard</h2><p style='color:#ef4444;'>Dashboard loaded with notice: {e}</p></body></html>"
+    return HTMLResponse(content=content)
 
 
 @app.get("/api/v1/info")
