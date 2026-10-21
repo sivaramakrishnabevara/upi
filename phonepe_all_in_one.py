@@ -2342,7 +2342,7 @@ async def phonepe_auth_send_otp(request: Request):
             await phone_input.fill("")
 
             # Type the 10-digit clean phone number cleanly ONCE
-            await phone_input.press_sequentially(clean_phone, delay=60)
+            await phone_input.type(clean_phone, delay=60)
             await page.keyboard.press("Tab")
             await asyncio.sleep(0.5)
 
